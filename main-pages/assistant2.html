@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<link rel="shortcut icon" href="./favicon.ico" />
+<title>Artificial Ignorance</title>
+<link rel="stylesheet" href="../styles/index.css" 
+		media="screen" type="text/css"/>
+<link rel="stylesheet" href="../styles/chat.css" 
+		media="screen" type="text/css"/>
+<style>
+</style>
+</head>
+<body>
+	<div class="ion-page">
+		<div class="ion-header" onclick="mainpage()">
+		    <div class='header2'>
+		        <img src="../favicon.ico" class="icon"/>
+			    <span class="mytitle">Hollway</span>
+		    </div>
+		</div>
+	    <br/>
+	    <div id="inner-scroll" class='inner-scroll'>
+	        <div id="chat-space" class="chat-space">
+	            <div style="height: 70px"></div>
+    		    <div name="temp_rep" class="reply">
+    		        <img src="../img/ai1.png">
+    		        <div>我是AI，请问有什么要问我的吗？</div>
+    		    </div>
+    		    <div name="temp_que" class="quest" style="display:none;">
+    		        <div>Hello! </div>
+    		        <img src="../img/user1.png">
+    		    </div>
+		    </div>
+	    </div>
+		
+		<div class="toolbar-container">
+		    <div class='textarea-holder'>
+		        <textarea id="c-input" value="" class="textarea"></textarea>
+		    </div>
+		    
+	    </div>
+	</div>
+	
+<script type="text/javascript">
+	function mainpage(){
+        window.location.href="./index.html";
+    }
+    
+    function send_msg(){
+        var flow = document.getElementById("chat-space");
+        var input = document.getElementById("c-input");
+        let content = input.value;
+        
+        if(content=="") return;  // in case there is no input
+        
+        // create new node
+        var newNode = document.createElement("div");
+        newNode.setAttribute('class', 'quest');
+        newNode.innerHTML='<div>'+content+'</div><img src="../img/user1.png">'
+        flow.appendChild(newNode);  // insert new chatting log
+        scrollBottom();
+        
+        
+        if(window.XMLHttpRequest){
+    		var panda = new XMLHttpRequest();
+    	}
+    	else{
+    		var panda = new ActiveXObject('Microsoft.XMLHTTP');
+    	}
+    	panda.onreadystatechange = function(){
+    	    console.log(panda.readyState);
+			//在ajax方式中，200和4表示正常取值
+			if(panda.status == 200 &&　panda.readyState == 4){
+				let n = panda.responseText;//结果赋值
+				let arr = n.split('_');//按_符号分割返回值，第一个值arr[0]是回答，第二个值是时间，第三个值是所处位置
+				console.log(arr);
+				let mes = arr[0];
+				
+				let newNode = document.createElement("div");
+                newNode.setAttribute('class', 'reply');
+                newNode.innerHTML='<img src="../img/ai1.png"><div>'+mes+'</div>'
+                flow.appendChild(newNode);
+                scrollBottom();
+			}
+    	}
+        //ajax方式（更新数据，而不用刷新整个网页），connect.php用于连接和读取数据库，作为对ajax的辅助
+    	panda.open('post','http://42.193.248.171/php/connect.php',true);//post方式传值
+    	panda.setRequestHeader('content-type','application/x-www-form-urlencoded');
+    	panda.send('sr='+ content);
+    	
+    	input.value="";
+    	input.focus();//输入框获得焦点
+    	
+        /*setTimeout(function(){
+            content = content.toLowerCase();
+            for(let i=0; i<mapper.length; i++){
+                content = content.replace(mapper[i][0],mapper[i][1]); // replace all key words
+            }
+            var newNode = document.createElement("div");
+            newNode.setAttribute('class', 'reply');
+            newNode.innerHTML='<img src="../img/ai1.png"><span>'+content+'</span>'
+            flow.appendChild(newNode);
+            scrollBottom();
+        }, 3000);*/
+    }
+    function scrollBottom(){
+        var item = document.getElementById("inner-scroll");
+        item.scrollTo(0,99999999);
+    }
+    
+    onload=function(){
+        var input = document.getElementById("c-input");
+        input.onkeydown=function(event){
+            event = event||window.event;
+            if((event.keyCode == 13)){  //回车触发对话提交
+                event.preventDefault();
+                send_msg();
+            }
+        }
+    }
+</script>
+</body>
+</html>

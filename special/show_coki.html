@@ -1,0 +1,73 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="viewport" content="width=device-width">
+<style>
+    .writing-space{
+	    padding: .5em;
+		overflow: auto;
+		min-width: 90%;
+		max-width: 90%;
+		min-height: 12em;
+		max-height: 12em;
+		padding: .1em .5em;
+		border: 1px solid silver;
+		background: /*前面是起始位置，后面是background-size*/
+					radial-gradient(at 50% 0, rgba(0,0,0,.1), transparent 70%) 0 0 / 100% 15px,
+					radial-gradient(at bottom, rgba(0,0,0,.1), transparent 70%) bottom / 100% 15px;
+		background-color: #27272B;
+		background-repeat: no-repeat;
+		color: white;
+		font: 100 100%/1.5 Consolas, Monaco, monospace;
+		white-space: pre;
+		tab-size: 2;
+	}
+</style>
+
+</head>
+<body>
+    <textarea name="paste-content" class="writing-space" id="paste"> </textarea>
+    
+<script type="text/javascript">
+	function getCookie() {
+		var url = location.search; //获取url中"?"符后的字串
+		var theRequest = new Object();
+		if (url.indexOf("?") != -1) {
+		    var str = url.substr(1);
+		    strs = str.split("%26");
+		    theRequest[strs[0].split("=")[0]]=(strs[0].split("=")[1]);
+		}
+		activityId=theRequest["activityId"];
+		
+		let edit = document.getElementById('paste');
+		c_openId="openId";
+		if (document.cookie.length > 0) {
+			c_start = document.cookie.indexOf(c_openId + "=");
+			if (c_start != -1) {
+				c_start = c_start + c_openId.length + 1;
+				c_end = document.cookie.indexOf(";", c_start);
+				if (c_end == -1)
+					c_end = document.cookie.length;
+				openId=unescape(document.cookie.substring(c_start, c_end));//通过截取字符串，获取到openId
+			    //window.location.href = "joinActivity.jsf?openId="+openId+"&activityId="+activityId;
+			    //获取open后再跳转到指定页面，把该openId放置到浏览器链接中。然后后台可以随时的从链接中确定是该用户在操作。
+			    
+			    edit.value = "openId="+openId+"&nbsp;activityId="+activityId;
+			}else{
+			    edit.value = 'result: '+c_start;
+			}
+		}else{
+			edit.value = "cookie not found";
+		}
+		//window.location.href = "joinActivity.jsf?activityId="+activityId;
+	}
+	setTimeout(()=>{
+		getCookie();
+	},300);
+
+	
+</script>
+</body>
+ 
+</html>
+ 

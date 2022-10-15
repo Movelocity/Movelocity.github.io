@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<link rel="shortcut icon" href="./favicon.ico" />
+<title>navigator</title>
+<link rel="stylesheet" href="../styles/index.css" 
+		media="screen" type="text/css"/>
+<style>
+    .context > a{
+        margin: .5em;
+		padding: 1em;
+		width: 70%;
+		height: 3em;
+		display: flex;
+		align-items: center;
+		border-radius: 10px;
+        font-weight: bold;
+        text-decoration: none;
+		background-color: #EEDDFA;
+		color: white;
+		text-shadow: 1px 2px 5px black;
+		transition: .5s;
+	}
+	.context > a:hover{
+	    box-shadow: 0px 10px 10px -10px black inset;
+	}
+</style>
+</head>
+<body>
+	<div class="context">
+		<div class="toptab" onclick="mainpage()">
+			<img src="../favicon.ico" class="icon"/>
+			<span class="mytitle">Hollway</span>
+		</div>
+		<br/>
+		<a href="http://42.193.248.171:888/p/index.html">数据库问答型AI</a>
+		<a href="http://42.193.248.171:8081/3d-pages/mmd-v3/index.html">MMD</a>
+		<a href="./det_and_2sc.html">行列式计算/补码转换</a>
+		<a href="https://cn.bing.com/">更好的搜索引擎</a>
+		<a href="https://space.bilibili.com/24031174">B站主页</a>
+		<a href="https://www.w3school.com.cn/index.html">网页制作</a>
+		<a href="https://www.runoob.com/">网页学习网站</a>
+		<a href="https://www.shouce.ren/api/html/html4/tools-color_selector.html">调色板</a>
+		<a href="http://100.64.13.17/a79.htm?wlanacip=100.64.13.18">广财校园网</a>
+		<a href="https://greasyfork.org/zh-CN/scripts/434013-automatic-gdufe">校园网登录辅助脚本(需油猴插件)</a>
+	    <a href="https://huaban.com/sfpbcjas84/pins/">花瓣美图</a>
+	    <!--a href="https://818ps.com/">传单海报模板</a!-->
+	    <a href="https://www.zhihu.com/people/xi-gua-ai-mao-wang/posts?page=3">摄影技巧</a>
+	    <a href="https://codechina.csdn.net/explore">Code China</a>
+	    <a href="https://zh.singlelogin.org/">免费电子书下载(需登录)</a>
+	    <a href="https://sci-hub.hkvisa.net/">免费论文下载</a>
+	    <!--a href="https://glados.one/console">开眼看世界</a!-->
+	    <!--a href="https://docs.python.org/3.9/index.html">Python文档(别用这个来入门)</a!-->
+	    <a href="https://www.shuxuele.com/index.html">数学</a>
+	    <a href="https://my.oschina.net/u/3018050/blog/1798117">Python pip命令</a>
+	    <a href="https://www.jianshu.com/p/e058668b2e16">自动请求数据工具</a>
+	    <a href="https://www.aigei.com/game2d/">贴图素材下载站</a>
+	    <a href="https://www.tuto-v.com/">CG教程网</a>
+	    <a href="https://www.pianshen.com/article/1772181553/">Arduino写esp8266</a>
+	    <a href="https://bbs.21ic.com/icview-2477980-1-1.html?fromuid=0&_dsign=d676c988">AI</a>
+	    <a href="https://www.qianbo.org/Tool/Beautify/Js-Formatter.html">Js-Formatter</a>
+	    <a href="https://www.wendangwang.com/doc/07141963834c4312c554f5a5/4">英汉翻译词汇</a>
+	    <a href="https://linux.cmsblogs.cn/hot.html">粗略的Linux指令查找</a>
+	    <a href="https://darkdust.net/files/GDB%20Cheat%20Sheet.pdf">GDB手册</a>
+	    <a href="https://www.bt-tt.com/">电影资源(广告和资源一样多)</a>
+	    <a href="https://www.jb51.net/article/92639.htm">网页Js注入</a>
+	    <a href="http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html">网页布局</a>
+	    <a href="https://css-tricks.com/absolute-positioning-inside-relative-positioning/">网页设计参考</a>
+	    <a href="https://blog.csdn.net/weixin_43409765/article/details/91332277">脚本监听按键</a>
+	    <a href="https://xiaomark.com/tool">工具收录站</a>
+	    <a href="https://teetow.github.io/elementary_grid/">ElementaryGrid打碟</a>
+	    <a href="https://copy.sh/brainfuck/">BrainFuck coding</a>
+		<br/><br/><br/><br/><br/>
+		<div class="foot">
+			<div style="color: #c7cc9f; margin: 1em;">STILL CONSTRUCTING...</div>
+		</div>
+	</div>
+<script type="text/javascript">
+    function mainpage(){
+        window.location.href="./index.html";
+    }
+    var colors = [
+                '#D6E055', //Agave
+				'#082323','#E6E2AF','#A7A37E','#EFECCA','#046380', //Sandy stone beach
+				'#1C171D','#FEE169','#CDD452','#F9722E','#C9313D', //Sushi Maki
+				'#2E95A3','#50B8B4','#C6FFFA','#E2FFA8' /*Agave*/];
+	onload=function(){
+	    tabs = document.querySelectorAll('.context > a');
+	    for(let i=0; i<tabs.length; i++){
+	        var color = colors.pop();
+			colors.unshift(color);
+			tabs[i].style.background = color;
+			tabs[i].setAttribute("target", "_blank");
+	    }
+	}
+	console.log("js executed.")
+</script>
+</body>
+</html>

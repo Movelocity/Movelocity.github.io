@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Matrix</title>
+    <style>
+        .holder {
+            display: flex;
+            flex-direction: row;
+            justify-content:center;
+            align-items:center;
+            min-width: 400px;
+        }
+        .matrix {
+            margin: -.5em;
+            padding: 2em;
+            
+        }
+        .cell{
+            width: 2.5em;
+            height:2.5em;
+            margin: 4px;
+        }
+
+        .btn{
+            margin:.3em;
+            padding:.4em;
+            height:1em;
+            width:auto;
+            cursor: pointer;
+            background-color:darkcyan;
+            color: whitesmoke;
+        }
+        .btn:hover{
+            background-color:aqua;
+            color:#433e32;
+        }
+        .lines_container{
+            margin:.5em;
+            flex-direction: column;
+        }
+        .line_container{
+            display: flex;
+            justify-content: space-between;
+            color:whitesmoke;
+        }
+        .line_input{
+            margin:.5em;
+            background-color: black;
+            color:white;
+            font-family: monospace;
+        }
+        .hex_info{
+            margin: 1em;
+            line-height: 1em;
+            color: white;
+        }
+        .note{
+            margin-top:5px;
+            font-size: small;
+        }
+    </style>
+</head>
+<body>
+    <h1>Matrix:</h1>
+    <div class="holder" style="background-color: #fbbe89;">
+        <div id="matrix_1" class="matrix">
+            <input class="cell" alt="00"/><input class="cell" alt="01"/><input class="cell" alt="02"/><input class="cell" alt="03"/><br/>
+            <input class="cell" alt="10"/><input class="cell" alt="11"/><input class="cell" alt="12"/><input class="cell" alt="13"/><br/>
+            <input class="cell" alt="20"/><input class="cell" alt="21"/><input class="cell" alt="22"/><input class="cell" alt="23"/><br/>
+            <input class="cell" alt="30"/><input class="cell" alt="31"/><input class="cell" alt="32"/><input class="cell" alt="33"/>
+        </div>
+        <span class="btn" onclick="m_det()">Det</span>
+        <!-- no row exchanging couse we don't accept float numbers -->
+        <!-- Determinant result -->
+        <span id="det_result" style="margin-left: 1em;font-weight: 700;">result: </span>
+    </div>
+    <p class="note"> 行列式计算，支持四阶以内噢</p>
+
+    <h1>Two's complement:</h1>
+    <div class="holder" style="background-color: #414757;">
+        <div id="binary" class="lines_container">
+            <div class="line_container" alt="bin">原码 Binary (signed):<input class="line_input" value="1001"/></div>
+            <!--div class="line_container" alt="sch">原码 Source hex:<input class="line_input" value="00"/></div-->
+            <div class="line_container" alt="osc">反码 One's complement:<input class="line_input" value="1110"/></div>
+            <div class="line_container" alt="tsc">补码 Two's complement:<input class="line_input" value="1111"/></div>
+            <!--div class="line_container" alt="tsh">补码 2's hex:<input class="line_input" value="00"/></div-->
+            <div class="line_container" alt="dec">原码 Decimal:<input class="line_input" value="9"/></div>
+        </div>
+        <div class="lines_container" style="margin-left:-1em;justify-content: space-between;">
+            <div class="hex_info" id="source_hex">0x9</div>
+            <div class="hex_info">.</div>
+            <div class="hex_info" id="twos_hex">0xf</div>
+            <div class="hex_info">.</div>
+        </div>
+        <div class="lines_container">
+            <div class="btn" onclick="trans_bin('bin')">Trans</div>
+            <!--div class="btn" onclick="trans_bin('osc')">Trans</div>
+            <div class="btn" onclick="trans_bin('tsc')">Trans</div>
+            <div class="btn" onclick="trans_bin('sch')">Trans</div>
+            <div class="btn" onclick="trans_bin('tsh')">Trans</div>
+            <div class="btn" onclick="trans_bin('dec')">Trans</div-->
+        </div>
+    </div>
+    <p class="note"> 原码，反码，补码转换（填在原码框里）</p>
+
+    <script type="text/javascript">
+        // binary transformation
+        let lines = document.getElementById("binary").getElementsByClassName("line_container");
+
+        for(let i=0; i<lines.length; i++){
+            if(lines[i].getAttribute("alt")!="dec"){
+                lines[i].getElementsByTagName("input")[0].oninput = function(){
+                    //lines[i].value = lines[i].value.replace("/[\D]/g", "");
+                }
+            }
+            lines[i].getElementsByTagName("input")[0].onfocus = function(){
+                focus_matrix = 0;
+            }
+        }
+
+        function getElemByAlt(alt){
+            for(let i=0; i<lines.length; i++){
+                if(lines[i].getAttribute("alt")==alt){
+                    //console.log("Finds alt: "+alt);
+                    return lines[i].getElementsByTagName("input")[0];
+                }
+            }
+            console.log("Alt: '"+alt+"' not found");
+            return null;
+        }
+
+        function bin_array_to_hex(bin_array){
+            let hex = ['0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f'];
+            let pows = [1, 2, 4, 8];
+            let set = 0;
+            let sum = 0;
+            let output_len = parseInt(bin_array.length/4);
+            if(bin_array.length%4>0) output_len++;       // when digits less than 4
+            //console.log("output_len: "+output_len);
+            let output = new Array(output_len);
+            
+            for(let i=bin_array.length-1; i>=0; i--){
+                sum += (bin_array[i]=='0')?0 : pows[set];
+                //console.log("sum: "+sum+", set: "+set);
+                if(++set == 4 || i==0){
+                    //console.log("routine; set: "+set+", i: "+i);
+                    output[--output_len] = hex[sum];
+                    set = 0;
+                    sum = 0;
+                }
+            }
+            return output.join("");
+        }
+
+        // from bin array to decimal, signed
+        function bin_array_to_dec(b_array){
+            let dec_output = 0;
+            let pow = 0;
+            for(let i=b_array.length-1; i>0; i--){
+                if(b_array[i]=='1') dec_output += Math.pow(2, b_array.length-i-1);
+            }
+            dec_output = b_array[0]==0? dec_output : -dec_output;
+            return dec_output;
+        }
+
+        function trans_bin(alt){
+            let bbin, bosc, btsc, bsch;  // source binary, 1s complement, 2s complement, source hex
+            if(alt=="bin"){     // binary to other
+                let carry;      // for caculation from 1s complement to 2s complement
+                bbin = getElemByAlt("bin").value.split("");
+                console.log(bbin);
+                let len = bbin.length;
+                console.log("length: "+len);
+                if(len==0) return;
+
+                let ones_clmt;
+                let twos_clmt;
+
+                let neg = 0;
+                if(bbin[0]=='1'){
+                    neg = 1;
+                    ones_clmt = new Array(len);
+                    twos_clmt = new Array(len);
+                    ones_clmt[0] = '1';
+                    // 负数反码
+                    for(let i=1; i<len; i++){
+                        if(bbin[i]=='0') ones_clmt[i] = '1';
+                        else if(bbin[i]=='1') ones_clmt[i] = '0';
+                    }
+                    // 负数补码
+                    carry = 1;
+                    for(let i=len-1; i>-1; i--){
+                        if(ones_clmt[i]=='1' && carry==1) twos_clmt[i] = '0';
+                        else if(ones_clmt[i]=='0' && carry==1){
+                            twos_clmt[i] = '1';
+                            carry = 0;
+                        }
+                        else twos_clmt[i] = ones_clmt[i];
+                    }
+                }
+                else{
+                    ones_clmt = bbin;   // 整数反码
+                    twos_clmt = bbin;   // 整数补码
+                }
+
+                getElemByAlt("osc").value = ones_clmt.join("");
+                //getElemByAlt("tsc").value = (carry==0)?twos_clmt.join(""):"1"+twos_clmt.join("");
+                getElemByAlt("tsc").value = twos_clmt.join("");
+                document.getElementById("source_hex").innerHTML = "0x"+bin_array_to_hex(bbin);
+                document.getElementById("twos_hex").innerHTML = "0x"+bin_array_to_hex(twos_clmt);
+                getElemByAlt("dec").value = bin_array_to_dec(bbin);
+            }
+        }
+
+        
+    </script>
+
+    <script type="text/javascript">
+        // matrix caculation
+        let matrix = document.getElementById("matrix_1");
+        let cells = matrix.getElementsByClassName("cell");
+        let matrix_length = cells.length;
+        let row_len = 4;        // a row of matrix, if you want to expand the matrix, remember to change this
+        let currentIndex = 0;
+        let focus_matrix = 0;   // flag
+        for(let i=0; i<matrix_length; i++){
+            cells[i].addEventListener("focus", function(){
+                focus_matrix = 1;
+                let position = cells[i].getAttribute("alt");
+                currentIndex = parseInt(position[0])*row_len+parseInt(position[1]);
+                //console.log("index: "+currentIndex);
+            });
+        }
+
+        // deal with arrow key movement
+        document.onkeydown = function (event) {
+            //let event = event || window.event;
+            if(focus_matrix==1){                        // when focused on the matrix
+                switch (event.keyCode) {                // manipulate the item index with arrow keys
+                    case 37:
+                        //console.log("←");
+                        currentIndex--;
+                        break;
+                    case 38:
+                        //console.log("↑");
+                        currentIndex -= row_len;
+                        break;
+                    case 39:
+                        //console.log("→");
+                        currentIndex++;
+                        break;
+                    case 40:
+                        //console.log("↓");
+                        currentIndex += row_len;
+                        break;
+                    default:
+                        return;                                     // ignore the folling steps
+                        //console.log(event.keyCode);
+                }
+                if(currentIndex < 0){
+                    currentIndex = matrix_length + currentIndex;    // circle forward
+                }
+                else if(currentIndex > matrix_length-1){            // circle backward
+                    currentIndex = currentIndex - matrix_length;    
+                }
+                cells[currentIndex].focus();
+            }
+        }
+
+        function m_det() {
+            console.log("count()");
+            let col_len = matrix_length/row_len;
+
+            // ckeck valid
+            if(col_len!=row_len){
+                console.log("matrix is not a square, no determinant.");
+                return;
+            }
+
+            // initialize the matrix for later use
+            let matrix = new Array(row_len);
+            for(let i=0; i<row_len; i++){
+                matrix[i] = new Array(col_len).fill(0);
+            }
+            //let matrix = new Array(row_len).fill(new Array(col_len).fill(0)); bad code
+            for(let i=0; i<row_len; i++){
+                for(let j=0; j<col_len; j++){
+                    let value = cells[i*row_len+j].value;
+                    if(value=="") value = '0';
+                    matrix[i][j] = parseInt(value);
+                }
+            }
+
+            // print the matrix, for checking
+            for(let i=0; i<row_len; i++){
+                console.log(matrix[i]);
+            }
+            let det_result = DET(matrix, row_len);
+            console.log("result: "+det_result);
+            document.getElementById("det_result").innerHTML = "result: "+det_result;
+        }
+
+        // Determinant caculation
+        // 求matrix[0][i]的余子式 minor. 
+        function minor(matrix, i, n){
+            let j, k, result;
+            let sub_matrix = new Array(n);
+            for(let i=0; i<n; i++){
+                sub_matrix[i] = new Array(n).fill(0);
+            }
+            // fill in with proper value
+            for(j=0; j<n-1; j++){
+                for(k=0; k<n-1; k++){
+                    if(k<i)
+                        sub_matrix[j][k] = matrix[j+1][k];
+                    else if(k>=i)
+                        sub_matrix[j][k] = matrix[j+1][k+1];
+                }
+            }
+            return DET(sub_matrix, n-1);
+        }
+
+        function DET(matrix, n){
+            let i, M, sum = 0;
+            if(n==1)
+                return matrix[0][0];
+            else if(n>1){
+                for(i=0; i<n; i++){
+                    M = minor(matrix, i, n);
+                    // append 代数余子式
+                    sum += Math.pow(-1, i+2)*matrix[0][i]*M;
+                }
+            }
+            return sum;
+        }
+        // for determinant caculation
+    </script>
+    
+</body>
+</html>
+

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <style>
+        body {
+            background-color: #ffffff;
+            font-size: medium;
+        }
+
+        .abs_top {
+            position: fixed;
+            display: flex;
+            padding-top: 1em;
+            top: 0;
+            width: 100%;
+            height: 7em;
+            flex-direction: column;
+            box-shadow: 0 5px 12px -8px #b0b3b5;
+            background-color: #ffffff;
+        }
+
+        .abs_top>img {
+            height:1.3em;
+            margin: 1.5em .3em .3em .3em;
+            max-width: 5%;
+        }
+
+        .toolbar {
+            display: flex;
+            margin: 1em .5em .2em 0;
+            width: 100%;
+            flex-direction: row;
+            justify-content: space-around;
+        }
+
+        .toolbar>.span_item {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
+
+        .list_container {
+            display: flex;
+            flex-direction: column-reverse;
+            align-items: center;
+            width: 100%;
+        }
+        .list_container>.list_item:last-child{
+            margin-top:9em;
+        }
+        .list_item {
+            display: flex;
+            width:95%;
+            flex-direction: row;
+            justify-content: space-around;
+            align-items: flex-end;
+            margin-top: 1em;
+            border: 1px solid #ebebeb;
+            border-radius: 5px;
+            box-shadow: 0 5px 20px -5px #e4e2e2;
+        }
+        .list_text{
+            display: flex;
+            padding: 1em 0 1em .9em;
+            flex-direction: column;
+            align-items: flex-start;
+            width: 100%;
+        }
+        .list_item>img{
+            margin:6px;
+            height:5em;
+            width:6em;
+            display: absolute!important;
+            right:0;
+        }
+
+        .abs_float_btns {
+            position: fixed;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-evenly;
+            bottom: 8%;
+            width: 97%;
+        }
+
+        .green_btn {
+            margin 0 .1em;
+            border-radius: 2em;
+            width: 42%;
+            height: 2.6em;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            background-color: #80c37e;
+            color: white;
+            box-shadow: 0 0 3px 3px #80c37e;
+            z-index: 15;
+        }
+
+        .green_btn>img {
+            max-width: 15%;
+            margin-right: .5em;
+        }
+
+        .horizontal-text {
+            color: #8a9697;
+            font-size: .9em;
+            margin: .1em 0;
+        }
+        .margin_btm_bit{
+            margin-bottom:.5em
+        }
+        .xxsmall-text{
+            font-size: xx-small;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="abs_top">
+        <img src="./drawable/left_arrow.png" onclick="go_back()"/>
+        <div class="toolbar">
+            <div class="span_item">
+                全部类型<span class="xxsmall-text">▼</span>
+            </div>
+            <div class="span_item">
+                全部状态<span class="xxsmall-text">▼</span>
+            </div>
+        </div>
+    </div>
+    <div class="list_container" id="list_container">
+        <div class="list_item" id="list_item" onclick="outing_detail()">
+            <div class="list_text">
+                <div class="margin_btm_bit">外出申请</div>
+                <div class="horizontal-text">
+                    <span>外出原因：</span>
+                    <span id="outing_reason" style="color:red">外出购物</span>
+                </div>
+                <div class="horizontal-text">
+                    <span>离校时间：</span>
+                    <span id="outing_time" style="color:black">2022-10-01 17:01</span>
+                </div>
+                <div class="horizontal-text">
+                    <span>返校时间：</span>
+                    <span id="outing_back_time" style="color:black">2022-10-01 21:00</span>
+                </div>
+            </div>
+            <img id="label_img" src="./drawable/outing_finished.png"/>
+        </div>
+    </div>
+
+    <div class="abs_float_btns">
+        <div class="green_btn">
+            <img src="./drawable/leave_btn.png"/>
+            请假申请
+        </div>
+        <div class="green_btn">
+            <img src="./drawable/outing_btn.png"/>
+            外出申请
+        </div>
+    </div>
+</div>
+<script src="./moment.js"></script>
+<script src="./my_util.js"></script>
+<script type="text/javascript">
+    var container = document.getElementById("list_container");
+    var list_item = document.getElementById("list_item");
+
+    for(var i=0; i<10; i++){
+        let o_reason = "外出散步"
+        let o_time = "2022-09-26 14:02";
+        let o_back = "2022-09-26 18:06"; 
+        let new_node = list_item.cloneNode(true);
+        
+        new_node.querySelectorAll("#outing_reason")[0].innerHTML = o_reason;
+        new_node.querySelectorAll("#outing_time")[0].innerHTML = o_time;
+        new_node.querySelectorAll("#outing_back_time")[0].innerHTML = o_back;
+        container.append(new_node);
+    }
+    
+    var last_hour = moment().add(-1.1, 'hour').format('YYYY-MM-DD HH:MM');
+    var next_hour = moment().add(2.3, 'hour').format('YYYY-MM-DD HH:MM');
+    
+    var currentNode = list_item.cloneNode(true);
+    currentNode.querySelectorAll("#outing_reason")[0].innerHTML = "外出吃饭";
+    currentNode.querySelectorAll("#outing_time")[0].innerHTML = last_hour;
+    currentNode.querySelectorAll("#outing_back_time")[0].innerHTML = next_hour;
+    currentNode.querySelectorAll("#label_img")[0].src= "./drawable/outing_active.png"
+    container.append(currentNode);
+    
+    function outing_detail(){
+        let fullname = getFullName();
+        let img_name = getImgName();
+        window.location.href=`./outing_detail.html?size=1&name=${fullname}&img_name=${img_name}`;
+    }
+</script>
+</body>

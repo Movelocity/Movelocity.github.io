@@ -1,0 +1,5 @@
+user-agent: *
+allow: 
+
+sitemap: http://42.193.248.171:8081/
+sitemap: http://42.193.248.171/

@@ -1,0 +1,116 @@
+@charset "UTF-8";
+body{
+	background-image: url(../img/background.png);
+	background-size:cover;
+	background-repeat:no-repeat;
+	background-attachment:fixed;
+}
+
+
+.topbar{
+	position:fixed;
+	top:0px;
+	left:0px;
+	background:#2d2d2d;
+	width:100%;
+}
+.title{
+	font-size:30px;
+	color:antiquewhite;
+	text-shadow: 0 1px 0 black;
+	font-family:cursive;
+	margin:0 0 0 20px;
+}
+
+.card{
+    width: 70%;
+}
+
+ul li {
+    border: 3px solid #558188;
+    border-radius:.8em;
+    padding: 1em;
+    box-shadow: 0 0 0 .3em #558188;
+    outline: .3em solid #558188;
+    height: 100px;
+    width: 70%;
+    margin:15px 50px 0 0;
+    background: rgba(0,0,0,0.2);
+}
+ul li p.odd {
+    /* 定位信息 */
+    position: static;
+    top: 0px;
+    left: 0px;
+}
+
+
+.barButton{
+	float:right;
+	display: block;
+  	padding: 10px 20px;
+  	margin: 0 5px;
+ 	text-decoration: none;
+ 	border-radius: 3px;
+ 	font-weight: 1000;
+  	color: antiquewhite;
+  	text-shadow: 0 1px 0 black;
+  	-webkit-transition: all ease .25s;
+  	transition: all ease .25s;
+  	cursor:pointer;
+}
+.barButton:hover{
+	background-color: antiquewhite;
+  	color: #111111;
+  	text-shadow: none;
+}
+
+.mask{
+	position: fixed;
+	left: 0px;
+	top: 0px;
+	background: #000;
+	width: 100%;
+	height: 100%;
+	/*opacity: 0.7;*/
+	background: rgba(0,0,0,0.5);
+}
+.window{
+	position: relative;
+	background: #fff;
+	width: 50%;
+	height: 80%;
+	border-radius: 5px;
+	margin: 5% auto;
+}
+#wincontent{
+	height: 40px;
+}
+#closebtn{
+	position: absolute;
+	width: 25px;
+	height: 25px;
+	border-radius: 3px;
+	right: 1px;
+	top: 1px;
+	color: gray;
+	text-align: center;
+	text-shadow: 0 1px 0 black;
+	font-family:cursive;
+  	-webkit-transition: all ease .25s;
+  	transition: all ease .25s;
+	cursor:pointer;
+}
+#closebtn:hover{
+	background: red;
+	color: #ffffff;
+	text-shadow: none;
+}
+#saveBtn{
+	position: absolute;
+	top: 150px;
+	left: 220px;
+	width:50px;
+	background:#ababab;
+	cursor:pointer;
+}

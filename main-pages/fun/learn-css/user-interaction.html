@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Interaction</title>
+<style>
+	button{
+		cursor: pointer;
+		border: 10px solid transparent;
+		box-shadow: 0 0 0 1px rgba(0,0,0,.3) inset;
+		background-clip: padding-box;
+		padding: .3em .4em;
+		background: #58a;
+		color: white;
+		border-radius: 50%;
+		font: bold 150%/1 sans-serif;
+		position: relative;
+		}
+		
+	button:before{
+		content: '';
+		position: absolute;
+		top: -10px; right: -10px;
+		bottom: -10px; left: -10px;
+		
+	}
+	.cbox > input[type="checkbox"] + label{cursor:pointer;}
+	.cbox > input[type="checkbox"] + label::before{
+		content: '\a0'; /*不换行空格*/
+		display: inline-block;
+		vertical-align: .2em;
+		width: .8em;
+		height: .8em;
+		margin-right: .2em;
+		border-radius: .2em;
+		background: silver;
+		text-indent: .15em;
+		line-height: .65;
+	}
+	
+	.cbox > input[type="checkbox"]:checked + label::before{
+		content: '\2713';
+		background: yellowgreen;
+	}
+	
+	.cbox > input[type="checkbox"]{
+		position: absolute;
+		clip: rect(0,0,0,0);   /*隐藏原来的复选框，但不能用display:none, 
+								因为那样会把它从键盘tab键切换焦点的队列中完全删除*/
+	}
+	
+	.cbox > input[type="checkbox"]:focus + label::before{
+		box-shadow: 0 0 .1em .1em #58a;
+	}
+	
+	.cbox > input[type="checkbox"]:disabled + label::before{
+		background: gray;
+		box-shadow: none;
+		color: #555;
+	}
+	
+	.togg > input[type="checkbox"]{
+		position: absolute;
+		clip: rect(0,0,0,0);
+	}
+	.togg > input[type="checkbox"] + label{
+		display: inline-block;
+		padding: .3em ,5em;
+		background: #ccc;
+		background-image: linear-gradient(#ddd, #bbb);
+		border: 1px solid rgba(0,0,0,.2);
+		border-radius: .3em;
+		box-shadow: 0 1px white inset;
+		text-align: center;
+		text-shadow: 0 1px 1px white;
+		cursor: pointer;
+	}
+	
+	.togg > input[type="checkbox"]:checked + label,
+	.togg > input[type="checkbox"]:active + label{
+		box-shadow: .05em .1em .2em rgba(0,0,0,.6) inset;
+		border-color: rgba(0,0,0,.3);
+		background: #bbb;
+	}
+	ul{
+		overflow: auto;
+		width: 10em;
+		height: 8em;
+		padding: .3em .5em;
+		border: 1px solid silver;
+		background: linear-gradient(red 30%, hsla(0,0%,100%,0)) 0 0 / 100% 50px,/*前面是起始位置，后面是background-size*/
+					radial-gradient(at 50% 0, rgba(0,0,255,.2), transparent 70%) 0 0 / 100% 15px,
+					linear-gradient(to top, red 15px, hsla(0,0%,100%,0)) bottom / 100% 50px,
+					radial-gradient(at bottom, rgba(0,0,255,.2), transparent 70%) bottom / 100% 15px;/*四层背景*/
+		background-repeat: no-repeat;
+		background-size: 100% 50px, 100% 15px;
+		background-attachment: local, scroll, local, scroll;
+		list-style: none;
+		margin-top: 2em;
+		font: 100 200%/1.6 'Frutiger LT Std', sans-serif;
+		margin-top: 30px;
+	}
+	li > a{ font: inherit; }
+	.image-slider{
+		position: relative;
+		display: inline-block;
+		
+	}
+	.image-slider > div{
+		position: absolute;
+		top: 0; bottom: 0; left: 0;
+		width: 50%; /*oringinal width*/
+		overflow: hidden;/*enabling it to cut image*/
+		resize: horizontal;/*<--key*/
+		max-width: 100%;
+	}
+	.image-slider > div::before{
+		content: '';
+		position: absolute;
+		bottom: 0; right: 0;
+		width: 12px; height: 12px;
+		background: white;
+		cursor: ew-resize;
+		padding: 5px;
+		background: linear-gradient(-45deg, white 50%, transparent 0);
+		background-clip: content-box;
+	}
+	.image-slider img{
+		display: block;
+		user-select: none;
+		width: 500px;
+	}
+	
+	.image-slider-js{
+		position: relative;
+		display: inline-block;
+	}
+	.image-slider-js > div{
+		position: absolute;
+		top: 0; bottom: 0; left: 0;
+		width: 50%;
+		overflow: hidden;
+	}
+	.image-slider-js img{
+		display: block;
+		user-select: none;
+		width: 500px;
+	}
+	.image-slider-js input{
+		position: absolute;
+		left: 0;
+		bottom: 10px;
+		width: 50%;
+		transform: scale(2);
+		transform-origin: left bottom;
+		margin: 0;
+		filter: contrast(.2);
+		mix-blend-mode: luminosity;
+	}
+</style>
+</head>
+<body>
+	<button>+</button>
+	<div class="cbox">
+		<input type="checkbox" id="awesome"/>
+		<label for="awesome">Awesome</label>
+	</div>
+	<div class="togg">
+		<input type="checkbox" id="toggle"/>
+		<label for="toggle">Toggle</label>
+	</div>
+	<ul>
+		<li>(Turn the red</li>
+		<li>into white</li>
+		<li>You will get</li>
+		<li>mask)</li>
+		<li><a href="align.html">align</a></li>
+		<li><a href="animation-1.html">animation</a></li>
+		<li><a href="blur.html">blur</a></li>
+		<li><a href="element-layout.html">element-layout</a></li>
+		<li><a href="layout2.html">layout2</a></li>
+		<li><a href="layout3.html">layout3</a></li>
+		<li><a href="nav-example.html">nav-example</a></li>
+		<li><a href="pie.html">pie</a></li>
+		<li><a href="Shapes.jsp">Shapes</a></li>
+		<li><a href="sticky-footer.html">sticky-footer</a></li>
+		<li><a href="visual-effects.html">visual-effects</a></li>
+		<li>(Turn the blue</li>
+		<li>into rgba(0,0,0,.2)</li>
+		<li>You will get</li>
+		<li>scroll effect)</li>
+	</ul>
+	<div class="image-slider">
+		<div>
+			<img src="../img/nephy_n.png" alt="Before"/>
+		</div>
+		<img src="../img/cafe.jpg" alt="After"/>
+	</div>
+	<div class="image-slider-js">
+		<img src="../img/Aurelia_c.png" alt="Before"/>
+		<img src="../img/shop.jpg" alt="After"/>
+	</div>
+	<script type="text/javascript">
+		function $$(selector, context){
+			context = context || document;
+			var elements = context.querySelectorAll(selector);
+			console.log("123");
+			return Array.prototype.slice.call(elements);
+		}
+		$$('.image-slider-js').forEach(function(slider){
+			//create new div to wrap the first img
+			console.log('321');
+			var div = document.createElement('div');
+			var img = slider.querySelector('img');
+			slider.insertBefore(div, img);
+			div.appendChild(img);
+			
+			//create visual slider 
+			var range = document.createElement('input');
+			range.type="range";
+			range.oninput = function(){
+				div.style.width = this.value+'%';
+			};
+			slider.appendChild(range);
+		});
+	</script>
+</body>
+</html>

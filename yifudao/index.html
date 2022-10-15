@@ -1,0 +1,14 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<script src="./my_util.js"></script>
+<script>
+    var randName = getFullName();
+    var img_name = getImgName();
+    var size = getPageSize(); 
+    window.location.href=`./main.html?size=${size}&name=${randName}&img_name=${img_name}`; // refresh params
+</script>     
+</body>
+</html>

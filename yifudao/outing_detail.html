@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <style>
+        body {
+            background-color: #ffffff;
+            font-size: small;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .abs_top {
+            margin-top:.5em;
+            display: flex;
+            top: 0;
+            width: 100%;
+            flex-direction: column;
+            background-color: #ffffff;
+        }
+
+        .abs_top>img {
+            margin: 2em .3em .3em .3em;
+            max-width: 5%;
+        }
+
+        .dark_panel {
+            display: flex;
+            width: 86%;
+            margin: 1.5em .5em .5em .5em;
+            flex-direction: column;
+            background-color: #f7f7f7;
+            padding: 1.2em;
+            border-radius: 8px;
+        }
+        .dark_panel>.title{
+            font-size: 1.2em;
+            margin-bottom:.5em; 
+            color:#a0a6a7
+        }
+        .dark_panel>.title_active{
+            color: orange;
+        }
+        .horizontal-text {
+            color: #8a9697;
+            font-size: 1em;
+            margin:.1em;
+        }
+        .table_container{
+            margin:.5em;
+            width:100%;
+        }
+        .table{
+            width:65%; 
+            height:14em;
+        }
+        
+        tr td:nth-child(1) {
+            color: #8a9697;
+        }
+        
+
+        .list_container {
+            display: flex;
+            flex-direction: column;
+            border-top: 1px solid #cdd2d3d9;
+            border-bottom: 1px solid #cdd2d3d9;
+            height: 100%;
+            padding-bottom: 40%;
+        }
+
+        .list_item {
+            display: flex;
+            margin-top: 1em;
+            width: 100%;
+            height: 5em;
+            /*border: 1px solid blue; for debug*/
+        }
+
+        .list_item>img {
+            border-radius: 50%;
+            padding: .2em 0 .4em .2em;
+            width: 50px;
+            height: 50px;
+            user-select: none;
+            -webkit-user-drag: none;
+            margin-right: .8em;
+        }
+        
+        
+        .list_text_container {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .list_text_container>div:first-child {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+        }
+
+        .list_item>.info {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+        }
+
+        .flex-stretch {
+            width: 100%;
+        }
+
+        .gray-text {
+            color: #a0a6a7;
+        }
+
+        .green-text {
+            color: #80c37e;
+        }
+
+        .big-text {
+            font-size: medium;
+            margin: 0 10px 10px 0;
+        }
+        .hide{
+            display: none !important;
+        }
+        .abs_float_btns {
+            position: fixed;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-evenly;
+            bottom: 5%;
+            width: 97%;
+        }
+        .abs_float_btns>img {
+            max-height: 20%;
+            max-width: 90%;
+            margin-right: .5em;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="abs_top">
+        <img src="./drawable/left_arrow.png" onclick="go_back()"/>
+        <div class="dark_panel">
+            <div class="title title_active">外出中</div>
+            <div class="horizontal-text">
+                <span>离校时间：</span>
+                <span id="outing_time" style="color:black">2022-10-01 17:01</span>
+            </div>
+            <div class="horizontal-text">
+                <span>返校时间：</span>
+                <span id="outing_back_time" style="color:black">2022-10-01 21:00</span>
+            </div>
+        </div>
+    </div>
+    <div class="table_container">
+        <table class="table">
+            <tr><td>外出总天数</td><td>0.1</td></tr>
+            <tr><td>外出原因</td><td>外出吃饭</td></tr>
+            <tr><td>外出地点</td><td>学校南门外面</td></tr>
+            <tr><td>家长是否知晓</td><td>是</td></tr>
+            <tr><td>紧急联系电话</td><td>13027378381</td></tr>
+        </table>
+    </div>
+    
+    <div class="list_container">
+        <div class="list_item">
+            <img src="./heads/default_avatar.png" id="stu_head"/>
+            <div class="list_text_container">
+                <div>
+                    <div><span class="big-text" id="name1">钟离</span><span class="gray-text">2021大数据管理与应用1班</span></div>
+                    <div class="green-text">发起申请</div>
+                </div>
+                <div class="gray-text">2022-06-26 00:03</div>
+            </div>
+        </div>
+        <div class="list_item">
+            <img src="./heads/31.jpg"/>
+            <div class="list_text_container">
+                <div>
+                    <div><span class="big-text">（广州校区）陈晓华</span></div>
+                    <div class="green-text">已通过</div>
+                </div>
+                <div class="gray-text">2022-06-26 00:03</div>
+            </div>
+            
+        </div>
+        <div class="list_item hide">
+            <img src="./heads/default_avatar.png"/>
+            <div class="list_text_container">
+                <div>
+                    <div><span class="big-text" id="name2">钟离</span></div>
+                    <div class="green-text">确认到达成功</div>
+                </div>
+                <div class="gray-text">2022-06-26 00:03</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="abs_float_btns">
+        <img src="./drawable/detail_float_btn.png"/>
+    </div>
+    
+</div>
+<script src="./moment.js"></script>
+<script src="./my_util.js"></script>
+<script type="text/javascript">
+    // console.log(window.location.href);
+    
+    var outing_time = document.getElementById("outing_time");
+    var otbk_time = document.getElementById("outing_back_time");
+    outing_time.innerHTML = moment().add(-1.1, 'hour').format('YYYY-MM-DD HH:MM');
+    otbk_time.innerHTML = moment().add(2.3, 'hour').format('YYYY-MM-DD HH:MM');
+
+    var fullname = getFullName();
+    document.getElementById("name1").innerHTML = fullname;
+    document.getElementById("name2").innerHTML = fullname;
+    
+    let img_name = getImgName();
+    document.getElementById("stu_head").src = "./boy_head/"+img_name;
+    // const params = new URLSearchParams(window.location.search);
+    // const eventName = params.get("eventName");
+    
+    // console.log(eventName);
+</script>
+</body>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>tester</title>
+		<meta charset="utf-8">
+	</head>
+	<body>
+	    <h1>Haloooo</h1>
+	    <script>
+	        var modelFile = 'res/砂糖/砂糖.pmx';
+            let mapper = {
+                    "Shatang": "res/砂糖/砂糖.pmx",
+                    "Xiangling": "res/香菱/香菱.pmx",
+                    "Fischl": "res/Fischl/Fischl.pmx",
+                    "General": "res/General/雷电将军.pmx",
+                    "shenhe": "res/Shenhe/申鹤.pmx",
+                    "Yunjin": "res/Yunjin/云堇.pmx",
+                    "Ningguang": "res/Ningguang/凝光.pmx",
+                    "NIngguang-s": "res/Ningguang-s/凝光.pmx",
+                    "Keqing": "res/Keqing/刻晴.pmx",
+                    "Keqing-s": "res/Keqing-s/刻晴.pmx",
+                    "Babara": "res/Babara/芭芭拉.pmx"
+            }
+            
+            onload=function(){
+                let param = getParam('model');
+                for(var key in mapper){
+                    if(key==param){
+                        modelFile = mapper[key];
+                        console.log(key+": "+modelFile);
+                    }
+                }
+                console.log("hello.");
+            }
+            
+            function getParam(paramName) { 
+                paramValue = "", isFound = !1; 
+                if (this.location.search.indexOf("?") == 0 && this.location.search.indexOf("=") > 1) { 
+                    arrSource = unescape(this.location.search).substring(1, this.location.search.length).split("&"), i = 0; 
+                    while (i < arrSource.length && !isFound) arrSource[i].indexOf("=") > 0 && arrSource[i].split("=")[0].toLowerCase() == paramName.toLowerCase() && (paramValue = arrSource[i].split("=")[1], isFound = !0), i++ 
+                } 
+                return paramValue == "" && (paramValue = null), paramValue 
+            } 
+	        
+	    </script>
+	    <script>
+	        function hi(str){
+	            console.log("got it: "+modelFile);
+	        }
+	        
+	    </script>
+	</body>
+</html>

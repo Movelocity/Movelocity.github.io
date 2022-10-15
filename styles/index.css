@@ -1,0 +1,196 @@
+@charset "UTF-8";
+    /*Main frame of our page*/
+    body{
+		background-image: url(../img/background.png);
+		background-size:cover;
+		background-repeat:no-repeat;
+		background-attachment:fixed;
+		font-family: Monospace;
+	}
+	.context{
+	    position:relative;
+		background-color: #232b33;
+		align-items: center;
+		display: flex;
+		flex-direction: column;
+		border-radius: 10px;
+		padding-bottom: 4em;
+	}
+	.toptab{
+		margin: 1em;
+		display: flex;
+		align-items: center;
+		background: -webkit-gradient(
+		    linear,
+            left top,
+            right top,
+            color-stop(0, #bb8bc7),
+            color-stop(0.4, #bb8bc7),
+            color-stop(0.5, white),
+            color-stop(0.6, #bb8bc7),
+            color-stop(1, #bb8bc7)
+        );
+        -webkit-text-fill-color: transparent;
+		-webkit-background-clip: text;
+		animation: go-through 5s forwards;
+	}
+	@keyframes go-through{
+	    from {
+            background-position: -64px;
+        }
+        50% {
+            background-position: 105px;
+        }
+        to{
+            background-position: 105px;
+        }
+	}
+	.toptab > .icon{
+		display: inline-block;
+		cursor: pointer;
+	}
+	.toptab > .mytitle{
+		margin-left: .4em;
+		color: #a58aac;
+		font-size: 200%;
+		font-family: Monospace;
+		cursor: pointer;
+	}
+	.panel{
+		margin: .5em;
+		padding: 1em;
+		width: 70%;
+		height: 3em;
+		display: flex;
+		align-items: center;
+		background-color: #eeefa8;
+		border-radius: 10px;
+		cursor: pointer;
+		text-decoration: none;
+	}
+	.panel:hover{
+		background-color: #f1cdec;
+	}
+	.barepanel{
+		margin: .5em;
+		padding: 1em;
+		width: 70%;
+		height: 3em;
+		display: flex;
+		align-items: center;
+		border-radius: 10px;
+		background-color: transparent;
+		cursor: pointer;
+		text-decoration: none;
+	}
+	.barepanel:hover{
+		background-color: rgba(0,0,0,.3);
+	}
+	.hor-text-container{
+		margin-left: 1em;
+		display: flex;
+		flex-direction: column;
+	}
+	
+	/*for text in the panel*/
+	.mytext{
+		margin: 2px; 
+		font-size: 150%;
+		color: black;
+	}
+	.mytext + .mytext{
+		font-size: 70%;
+	}
+	.mytext2{
+	    margin-left: 1em;
+	    font-size: 150%;
+	    color: white;
+	}
+	.mytext2 + .mytext2{
+	    font-size: 100%;
+	    align-self: flex-end;
+	}
+	/*.barepanel > .mytext{
+		margin-left: 1em;
+		font-size: 150%;
+		color: white;
+	}*/
+	.filter{
+		filter: invert(100%);
+	}
+	.foot{
+		border-radius: 0 0 10px 10px;
+		height: 5em;
+		width: 100%;
+		background: #242230;
+		color: #B3ADC4;
+	}
+	
+	/*The sector mainly for clipboard-masuta.jsp*/
+	.writing-page{
+		padding: 1em;
+		width: 90%;
+	}
+	.writing-space{
+	    padding: .5em;
+		overflow: auto;
+		min-width: 70%;
+		max-width: 70%;
+		min-height: 8em;
+		max-height: 8em;
+		padding: .3em .5em;
+		border: 1px solid silver;
+		background: /*前面是起始位置，后面是background-size*/
+					radial-gradient(at 50% 0, rgba(0,0,0,.1), transparent 70%) 0 0 / 100% 15px,
+					radial-gradient(at bottom, rgba(0,0,0,.1), transparent 70%) bottom / 100% 15px;
+		background-color: #27272B;
+		background-repeat: no-repeat;
+		color: white;
+		font: 100 100%/1.5 Consolas, Monaco, monospace;
+		white-space: pre;
+		tab-size: 2;
+	}
+	.pasteform > .submit{
+	    vertical-align: 90%;
+	    margin: 1em;
+	    padding: .5em;
+	    border-radius: 8px;
+	    background: linear-gradient(45deg, #E9CDE8, #E1D587);
+	    color: #000;
+	    cursor: pointer;
+	}
+	.pasteform > .submit:hover{
+	    box-shadow: -2px -2px 5px #D6C574 inset;
+	}
+	.list-container{
+	    margin-top: 1em;
+	    width: 100%;
+	    display: -webkit-flex; /*Safari*/
+	    display: flex;
+	    flex-direction: column-reverse;
+	    justify-content: flex-start;
+	}
+	.list-container > div{
+	    color: white;
+        padding: 1em;
+	    border: 1px solid transparent;
+		border-top-color: #4e464d;
+		font: 100 100%/1.5 Consolas, Monaco, monospace;
+		display: flex;
+	    flex-direction: column;
+	}
+	.list-container > div > div{
+	    color: white;
+	    padding: 1em;
+	    border-radius: 10px;
+	    background: hsl(210deg 14% 22%);
+	    tab-size: 2;
+	    /*white-space: pre;*/
+	    word-break: break-all;
+	}
+	.list-container > div >span{
+	    margin-top: .5em;
+	    margin-left: 1em;
+	    font:small-caption;
+	}
+    /*sector mainly for clipboard-masuta.jsp is above*/

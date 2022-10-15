@@ -1,0 +1,110 @@
+@charset "UTF-8";
+div b{
+	font-size:5em;
+	font-style:italic;
+}
+.stripe1{
+	background: linear-gradient(#fb3 50%, #58a 50%);
+	background-size:100% 30px;
+}
+.stripe2{
+	background: linear-gradient(#fb3 30%, #58a 0);
+	background-size:100% 30px;
+}
+.stripe3{
+	background: linear-gradient(#fb3 33.3%, #58a 0, #58a 66.6%, yellowgreen 0);
+	background-size:100px 45px;
+}
+.stripe4{
+	background: linear-gradient(to right/*90deg*/,#fb3 50%, #58a 0);
+	background-size: 30px 100%;
+}
+.stripe5{
+	background: linear-gradient(45deg, #fb3 50%, #58a 0);
+	background-size: 30px 30px;/*30px * 30px的单个贴片*/
+}
+.stripe6{
+	background: linear-gradient(45deg,  #fb3 25%, #58a 0, #58a 50%, 
+										#fb3 0, #fb3 75%, #58a 0);
+	background-size: 42px 42px;/*沿用30px会得到2/sqrt2的宽度的线条*/
+}
+.stripe7{
+	background: repeating-linear-gradient(45deg, #fb3, #58a 30px);/*色标无限重复*/
+}
+.stripe8{
+	background: repeating-linear-gradient(30deg, 
+					#79b, #79b 15px, #58a 0, #58a 30px);
+}
+.stripe9{
+	background: #56a;/*修改这里直接匹配深浅色*/
+	background-image: repeating-linear-gradient(30deg, 
+						hsla(0,0%,100%,.1), 
+						hsla(0,0%,100%,.1) 15px,
+						transparent 0, transparent 30px);
+}
+.mesh1{
+	background: #58a;
+	background-image: linear-gradient(white 1px, transparent 0),
+					  linear-gradient(90deg,white 1px, transparent 0);
+	background-size: 30px 30px;
+}
+.mesh2{
+	background: #58a;
+	background-image: linear-gradient(white 2px, transparent 0),
+					  linear-gradient(90deg,white 2px, transparent 0),
+					  linear-gradient(hsla(0,0%,100%,.3) 1px, transparent 0),
+					  linear-gradient(90deg,hsla(0,0%,100%,.3) 1px, transparent 0);
+	background-size: 75px 75px, 75px 75px, 
+					 15px 15px, 15px 15px;
+}
+.mesh3{
+	background: white;
+	background-image: linear-gradient(90deg, 
+							rgba(200,0,0,.5) 50%, transparent 0),
+					  linear-gradient(
+							rgba(200,0,0,.5) 50%, transparent 0);
+	background-size: 30px 30px;
+}
+.dot1{
+	background: #655;
+	background-image: radial-gradient(tan 30%, transparent 0);
+	background-size: 30px 30px;
+}
+.dot2{
+	background: #655;
+	background-image: radial-gradient(tan 30%, transparent 0),
+					  radial-gradient(tan 30%, transparent 0);
+	background-size: 30px 30px;
+	background-position: 0 0, 15px 15px;/*往右下偏移一点再画第二层*/
+}
+.table1{
+	background: #eee;
+	background-image: linear-gradient(45deg, #bbb 25%, transparent 0),
+					  linear-gradient(45deg, transparent 75%, #bbb 0);
+	background-size: 30px 30px;
+}
+.table2{
+	background: #eee;
+	background-image: linear-gradient(45deg, #bbb 25%, transparent 0),
+					  linear-gradient(45deg, transparent 75%, #bbb 0);
+	background-position: 0 0, 15px 15px;/*斜向交错，自动铺满页面*/
+	background-size: 30px 30px;
+}
+.checkerboard{
+	background: #eee;
+	background-image: linear-gradient(45deg, rgba(0,0,0,.25) 25%, transparent 0,
+											transparent 75%, rgba(0,0,0,.25) 0),
+					  linear-gradient(45deg, rgba(0,0,0,.25) 25%, transparent 0,
+											transparent 75%, rgba(0,0,0,.25) 0);
+	background-position: 0 0, 15px 15px;/*斜向交错，自动铺满页面*/
+	background-size: 30px 30px;
+}
+.randomStripe{
+	background: hsl(20, 40%, 90%);
+	background-image: 
+		linear-gradient(90deg, #fb3 11px, transparent 0),
+		linear-gradient(90deg, #ab4 23px, transparent 0),
+		linear-gradient(90deg, #655 41px, transparent 0);
+		/*使用相对质数来排列*/
+	background-size: 41px 100%, 61px 100%, 83px 100%;
+}

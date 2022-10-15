@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<link rel="shortcut icon" href="./favicon.ico" />
+<title>Artificial Ignorance</title>
+<link rel="stylesheet" href="../styles/index.css" 
+		media="screen" type="text/css"/>
+<style>
+    .chat-space{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .chat-space > div{
+        /*border: 1px solid white;*/
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        color: white;
+    }
+    .chat-space > .reply{
+        /*normal*/
+    }
+    .chat-space > .quest{
+        align-self: flex-end;
+    }
+    .reply > img, .quest > img{
+        border-radius: 50%;
+        transform: scale(0.5);
+    }
+    .reply > span, .quest > span{
+        margin-inline: -.5em;
+        padding: 1em;
+        border-radius: 10px;
+        background: hsl(210deg 17% 35%);
+        tab-size: 2;
+        white-space: pre;
+    }
+    .chat-input{
+        width: 100%;
+        position: fixed;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        background-color: #b9bfc8;
+        bottom: 0;
+        left: 0;
+        padding: 1em;
+    }
+    .c-input{
+        margin-right: 1em;
+        border-radius: 5px;
+        font: 1em;
+    }
+    .chat-btn{
+        background: green;
+        padding: 0 6px;
+        color: white;
+        cursor: pointer;
+        border-radius: 5px;
+        line-height: 2.3em;
+    }
+    .chat-btn:hover{
+        background: #466946;
+    }
+</style>
+</head>
+<body>
+	<div class="context" style="min-height:40em;">
+		<div class="toptab" onclick="mainpage()">
+			<img src="../favicon.ico" class="icon"/>
+			<span class="mytitle">Hollway</span>
+		</div>
+	    <br/>
+		<div id="chat-space" class="chat-space">
+		    <div name="temp_rep" class="reply">
+		        <img src="../img/ai1.png">
+		        <span>我是AI，请问有什么要问我的吗？</span>
+		    </div>
+		    <div name="temp_que" class="quest" style="display:none;">
+		        <span>Hello! </span>
+		        <img src="../img/user1.png">
+		    </div>
+		</div>
+		<div class="foot" style="background:#232b33;">
+			<div style="margin: 2em;"></div>
+		</div>
+	</div>
+	<div class="chat-input">
+		 <input id="c-input" value="" class="c-input"/>
+		 <a class="chat-btn" onclick="send_msg()">Send</a>
+	</div>
+<script type="text/javascript">
+    window.location.href="assistant3.html";
+    
+	function mainpage(){
+        window.location.href="./index.html";
+    }
+    let mapper = [
+        ['你','我'],['你','我'],['吗',''],
+        ['呀',''],['谁','我'],['？',''],
+        ['?',''],['帅','超帅'],['美','好美'],
+        ['会什么','会说话'],['哪','那'],
+        ['what','well, what'],
+        ['how','fine, how'],
+        ['are you','I am'],
+        ['can you','I can'],
+        ['do you','I']
+        ];
+    /*document.getElementById("c-input").bind('keydown',function(event){
+        if(event.keyCode == "13") {
+            alert(1111);
+        }
+    });  */
+    function send_msg(){
+        var flow = document.getElementById("chat-space");
+        var input = document.getElementById("c-input");
+        let content = input.value;
+        if(content=="") return;  // in case there is no input
+        input.value = "";
+        // create new node
+        var newNode = document.createElement("div");
+        newNode.setAttribute('class', 'quest');
+        newNode.innerHTML='<span>'+content+'</span><img src="../img/user1.png">'
+        flow.appendChild(newNode);  // insert new chatting log
+        scrollBottom();
+        
+        setTimeout(function(){
+            content = content.toLowerCase();
+            for(let i=0; i<mapper.length; i++){
+                content = content.replace(mapper[i][0],mapper[i][1]); // replace all key words
+            }
+            var newNode = document.createElement("div");
+            newNode.setAttribute('class', 'reply');
+            newNode.innerHTML='<img src="../img/ai1.png"><span>'+content+'</span>'
+            flow.appendChild(newNode);
+            scrollBottom();
+        }, 3000);
+    }
+    function scrollBottom(){
+        setTimeout('window.scrollTo(0,99999999);', 700);
+    }
+    
+    onload=function(){
+        var input = document.getElementById("c-input");
+        input.onkeydown=function(event){
+            event = event||window.event;
+            if((event.keyCode == 13)){  //回车触发对话提交
+                send_msg();
+            }
+        }
+    }
+</script>
+</body>
+</html>

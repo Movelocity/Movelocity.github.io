@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Animation One</title>
+<style>
+	@keyframes bounce{
+		60%, 80%, to{
+			transform: translateY(400px);
+			animation-timing-function: ease;
+		}
+		70%{  transform: translateY(300px); }
+		90%{  transform: translateY(360px); }
+		
+	}
+	
+	.ball{
+		position: static;
+		animation: bounce 3s cubic-bezier(.1,.25,1,.25) forwards;
+		background: red radial-gradient(at 30% 30%, #fdd, red);
+		width: 0; height: 0;
+		padding: 1.5em;
+		border-radius: 50%;
+		margin: auto;
+	}
+	body{
+		background: linear-gradient(skyblue, white 450px, yellowgreen 0);
+		min-height: 100vh;
+		font: 200%/1.6 Baskerville;
+	}
+	
+	@keyframes elastic-grow{
+		from{ transform: scale(0); }
+		70%{
+			transform: scale(1.1);
+			animation-timing-function: cubic-bezier(.1,.25,1,.25);
+		}
+	}
+	input{
+		display: block;
+		padding: 0 .4em;
+		font: inherit;
+	}
+	.callout{
+		position: absolute;
+		max-width: 14em;
+		background: #fed;
+		border-radius: .3em;
+		border: 1px solid rgba(0,0,0,.3);
+		box-shadow: .05em .2em .6em rgba(0,0,0,.2);
+		margin: .3em 0 0 -.2em;
+		font-size: 75%m;
+		padding: .6em .8em;
+		transition: .5s cubic-bezier(.25,.1,.3,1.5) transform;
+		transform-origin: 1.4em, -.4em;
+	}
+	.callout:before{
+		content: "";
+		position: absolute;
+		top: -.4em; left: 1em;
+		padding: .35em;
+		background: inherit;
+		border: inherit;
+		border-right: 0; border-bottom: 0;
+		transform: rotate(45deg);/*形成气泡的角*/
+	}
+	input:not(:focus) + callout:not(:hover){
+		transform: scale(0);
+		transition: .25s transform;
+	}
+	input:not(:focus) + .callout{
+		transform: scale(0);
+		transition: .25s transform;/*指定了该动画只应用于transform*/
+		background: white;
+	}
+	input:focus + .callout{ animation: elastic-glow .5s; }
+	
+	@keyframes loader{
+		from{background-position: 0 0; }
+		10%{ background-position: -240px 0; }
+		20%{ background-position: -480px 0; }
+		30%{ background-position: 0 -240px; }
+		40%{ background-position: -240px -240px; }
+		50%{ background-position: -480px -240px; }
+		60%{ background-position: 0 -480px; }
+		70%{ background-position: -240px -480px; }
+		80%{ background-position: -480px -480px; }
+		90%{ background-position:  0 -720px; }
+		to{  background-position: -240px -720px; }
+	}
+
+	.loader{
+		width: 240px; height: 240px;
+		background: url(../img/run.png) 0 0;
+		animation: loader 1.5s infinite step-start;
+		text-indent: 200%;
+		white-space: nowrap;
+		overflow: hidden;
+	}
+	
+	@keyframes blink-smooth{ to{ color: transparent; } }
+	.blink{
+		animation: .5s blink-smooth 6 alternate;
+					/*params: duration name times direction*/
+		animation-delay: 9s;	
+	}
+	@keyframes blink{ 50%{ color: black; } }
+	.highlight{
+		animation: 1s blink 3 steps(1);
+		animation-delay: 12s;
+		color: transparent;
+	}
+	
+	@keyframes typing{
+		from{ width:0 }
+	}
+	@keyframes caret{
+		50%{ border-color: currentColor; }
+	}
+	.typing{
+		font: 100%/1.6 consolas;
+		width: 15ch;	/*ch:0等宽字符的宽度*/
+		border-right: .05em solid transparent;
+		animation: 6s typing steps(15),
+					1s caret steps(1) infinite;
+		white-space: nowrap;/*阻止折行*/
+		overflow: hidden;
+	}
+	
+	@keyframes panoramic{ to{ background-position: 100% 0; } }
+	
+	.panoramic{
+		width: 250px; height: 350px;
+		background: url("../img/future-war.jpg");
+		background-size: auto 100%;
+		animation: panoramic 10s linear infinite alternate;
+		animation-play-state: paused;
+	}
+	.panoramic:hover, panoramic:focus{
+		animation-play-state: running;
+	}
+	
+	
+	@keyframes spin-on-path{
+		to{ transform: rotate(1turn); }
+	}
+	.path{
+		width: 200px; height: 200px;
+		border-radius: 50%;
+		border: 50px solid lightyellow;
+		background: #fed;
+	}
+	.avatar{
+		width: 45px; height: 45px;
+		border-radius: 50%;
+		animation: spin-on-path 3s infinite linear;
+		animation-delay: 12s;
+		transform-origin: 100px 100px;
+	}
+	.avatar > img{
+		border-radius: 50%;
+		width: 45px; height: 45px;
+		animation: inherit;
+		animation-delay: 12s;
+		animation-direction: reverse;
+	}
+	
+	@keyframes spin2{
+		from{
+			transform:	rotate(0turn)
+						translateY(-150px) translateY(50%)
+						rotate(1turn);
+		}
+		to{
+			transform:	rotate(1turn)
+						translateY(-150px) translateY(50%)
+						rotate(0turn);
+		}
+	}
+	.avatar2{
+		animation: spin2 3s infinite linear;
+		animation-delay: 15s;
+		display: block;
+		width: 50px;
+		margin: calc(50% - 25px) auto 0;
+		border-radius: 50%;
+		overflow: hidden;
+	}
+	.path2{
+		width: 300px; height: 300px;
+		padding: 20px;
+		margin: 100px auto;
+		border-radius: 50%;
+		background: #fb3;
+	}
+	
+</style>
+</head>
+<body>
+	<label>
+		Your username: <input id="username"/>
+		<span class="callout">Only letters, numbers, 
+						underscores(_) and hyphens(-) accepted</span>
+	</label>
+	<div class="ball"> </div>
+	<div class="loader">Loading...</div>
+	<div class="blink">Blink</div>
+	<div class="highlight">Highlight</div>
+	<br/><div class="typing">CSS is awesome. Js is a tool.</div>
+	<br/><div class="panoramic"></div>
+	<div class="path">
+		<div class="avatar">
+			<img src="../img/bread-girl.jpg"/>
+		</div>
+	</div>
+	<div class="path2">
+		<img src="../img/bread-girl.jpg" class="avatar2"/>
+	</div>
+	<script type="text/javascript">
+		function $$(selector, context){
+			context = context || document;
+			var elements = context.querySelectorAll(selector);
+			return Array.prototype.slice.call(elements);
+		}
+		$$('.typing').forEach(function(typing){
+			var len = typing.textContent.length, s = typing.style;
+			s.width = len + 'ch';
+			s.animationTimingFunction = "steps(" + len + "),steps(1)"; 
+		});
+	</script>
+</body>
+</html>

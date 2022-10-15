@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Vertical Align</title>
+<style>
+	body{
+		background: #1C171D;
+		font: 100%/1.5 sans-serif;
+	}
+	main{
+		background: #C9313D;
+		color: white;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		padding: 1em;
+	}
+	
+	.no-absolute-position{
+		position: static;
+		width: 18em;
+		padding: 1em 1.5em;
+		margin: 50vh auto 0;
+		transform: translateY(-50%);
+		text-align: center;
+		box-sizing: border-box;
+	}
+	
+	h1{
+		margin: 0 0 .2em;
+		font-size: 150%;
+	}
+	
+	.flex-box{
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 18em;
+		height: 10em;
+		margin: auto;
+	}
+</style>
+</head>
+<body>
+	<main class="flex-box">
+		<h1>Am I centered yet?</h1>
+		<p>Center me, please!</p>
+	</main>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>ErrorPage</title>
+		<style> body{
+				font: sans-serif;
+			}
+			.center{
+				text-align: center;
+			}
+			.text-flow{
+			    position: absolute;
+			    padding: .2em;
+			    left: 50%;
+			    margin-left: -20em;
+			    background: linear-gradient(#336699 10%, #0066cc 10%);
+			    border-radius: 10px;
+			    box-shadow: 0 0 6px 4px #ccffff;
+			    color: #99eeff;
+			    font-weight: bold;
+			    height: 20em;
+			    width: 40em;
+			}
+			.text-flow > textarea{
+			    padding: 5px;
+			    min-height: 16em;
+			    max-height: 16em;
+			    min-width: 95%;
+			    max-width: 95%;
+			    color: inherit;
+			    background: #232f3c;
+		        font: 100 100%/1.5 Consolas, Monaco, monospace;
+		        white-space: pre;
+		        tab-size: 2;
+			}
+			.bar{
+			    margin-left: -15em;
+			    width: 150vmax;
+			    height: 2em;
+			    background: #ef41368f;
+			    transform: translateY(10em) rotate(-20deg);
+			    
+			}
+			@keyframes rolling{
+			    to{
+			       transform: translateX(-8.6em); 
+			    }
+			}
+			.bar::before{
+			    content: "File not found.           File not found.         File not found.         File not found.         File not found.         File not found.         File not found.         File not found.         File not found.         File not found.         File not found.         File not found.         File not found.";
+			    position: absolute;
+			    animation: rolling 12s infinite linear;
+			    color: white;
+			    font-weight: bold;
+			    font-size: 1.5em;
+			    white-space: pre;
+			}
+			
+	</style>
+	</head>
+	<body>
+		<div class="center">
+			<b style="font: bold 200%/1 sans-serif;">
+				 成功到达一个未知页面
+			</b>
+			<br/><br/>
+			<div class="text-flow">
+			    <p style="margin: 4px;">信息:  加载中...</p>
+			    <textarea>:这是哪？&#10;:你是谁？&#10;:我在干什么？&#10;
+			    </textarea>
+			</div>
+		</div>
+		<div class="bar"></div>
+		<div class="bar" style="transform: translateY(22em) rotate(25deg);"></div>
+	</body>
+</html>

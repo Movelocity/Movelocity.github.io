@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <style>
+        body {
+            background-color: #ffffff;
+        }
+
+        .header {
+            font-size: medium;
+            margin: 2.5em 0 1.5em .5em;
+        }
+
+
+        .item_table {
+            display: flex;
+            flex-direction: column;
+            flex-wrap: nowrap;
+            width: 100%;
+        }
+
+        .item_row {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            width: 100%;
+        }
+
+        .click_item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 22%;
+            padding: .5em 0;
+            width: auto;
+            height: auto;
+            text-decoration: none;
+        }
+
+        .click_item>img {
+            max-width: 75%;
+            max-height: 75%;
+            width: auto;
+            height: auto;
+        }
+
+        .click_item>span {
+            font-size: small;
+            color: #a1a1a1;
+        }
+
+        .slide_image {
+            align-self: center;
+            max-width: 95%;
+            max-height: 28%;
+            width: auto;
+            height: auto;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            width: 100%;
+        }
+
+        .absolute_bottom {
+            position: fixed;
+            bottom: 0em;
+            background-color: #ffffff;
+            border-top: .5px solid gray;
+        }
+
+
+        .absolute_bottom>.click_item>img {
+            max-width: 40%;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        广东财经大学
+    </div>
+    
+    <img class="slide_image" src="./drawable/anti_pademic.png"/>
+    
+
+    <div class="item_table">
+        <div class="item_row">
+            <a class="click_item"><img src="./drawable/ic_announce.png"/><span>通知</span></a>
+            <a class="click_item"><img src="./drawable/ic_health.png"/><span>健康上报</span></a>
+            <a class="click_item"><img src="./drawable/ic_fill.png"/><span>问卷填写</span></a>
+            <a class="click_item"><img src="./drawable/ic_addressing.png"/><span>定位签到</span></a>
+        </div>
+        <div class="item_row">
+            <a class="click_item" onclick="outing_page()"><img src="./drawable/ic_outing.png"/><span>离校返校</span></a>
+            <a class="click_item"><img src="./drawable/ic_check.png"/><span>活动签到</span></a>
+            <a class="click_item" onclick="outing_page()"><img src="./drawable/ic_leave.png"/><span>请假外出</span></a>
+            <a class="click_item" onclick="qrcode_page()"><img src="./drawable/ic_qrcode.png"/><span>出入校二维码</span></a>
+        </div>
+    </div>
+
+    <div class="absolute_bottom item_row">
+        <a class="click_item" onclick="main_page()"><img src="./drawable/main_green.png"/><span style="color:#7dc37c">首页</span></a>
+        <a class="click_item" onclick="class_page()"><img src="./drawable/class_gray.png"/><span>我的班级</span></a>
+        <a class="click_item" onclick="user_page()"><img src="./drawable/user_gray.png"/><span>我的</span></a>
+    </div>
+</div>
+<script src="./my_util.js"></script>
+<script>
+    /**
+     * size:
+     *  1: xiaomi10s
+     *  2: ?
+     */
+    var randName = getFullName();
+    var img_name = getImgName();
+    var size = getPageSize(); 
+    
+    
+    function outing_page(){
+        window.location.href=`./outing.html?size=${size}&name=${randName}&img_name=${img_name}`;
+    }
+    
+    function qrcode_page(){
+        window.location.href=`./qrcode.html?size=${size}&name=${randName}`;
+    }
+    
+    function class_page(){ 
+        console.log("page is under construction.");
+    }
+        
+    function user_page(){
+        // 跳转到user.html 页面并清除当前页面的history记录
+        window.history.replaceState(null, "", `./user_page.html?size=${size}&name=${randName}&img_name=${img_name}`);
+        window.history.go(0);
+    }
+    
+</script>
+</body>
+</html>

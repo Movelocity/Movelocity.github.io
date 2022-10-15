@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<link rel="shortcut icon" href="./favicon.ico" />
+<title>Resources</title>
+<link rel="stylesheet" href="../styles/index.css" media="screen" type="text/css"/>
+<style>
+	/*body{
+		background-image: url(../img/background.png);
+		background-size:cover;
+		background-repeat:no-repeat;
+		background-attachment:fixed;
+		font-family: Monospace;
+		color: white;
+	}
+	.toptab{
+		margin: 1em;
+		display: flex;
+		align-items: center;
+	}
+	.toptab > .icon{
+		display: inline-block;
+	}
+	.toptab > .mytitle{
+		margin-left: .4em;
+		color: #a58aac;
+		font-size: 200%;
+		font-family: Monospace;
+		cursor: default;
+	}
+	.context{
+		position: relative;
+		background-color: #232b33;/*#272728;
+		display: flex;
+		align-items: center;
+		flex-direction: column;
+		border-radius: 10px;
+	}
+	.topsector{
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		width: 100%;
+	}*/
+	.navbar{
+		top: 0px;
+		left: 0px;
+		width: 100%;
+		height: 2em;
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		border: 1px solid transparent;
+		border-bottom: 1px solid rgba(255,255,255,.4);
+	}
+	.navbar > div{
+		text-decoration: none;
+		color: white;
+		margin-left: 1em;
+		border: 3px solid transparent;
+		transition: .5s;
+		cursor: pointer;
+	}
+	.navbar > div:hover{
+		text-shadow: 0 0 .1em, 0 0 .2em;
+	}
+	.navbar > div.selected{/*space not allowed between a and .selected*/
+		border: 3px solid transparent;
+		border-bottom-color: #f5d6eb;
+		color: #f5d6eb;
+	}
+	.sector{
+		margin: 2em;
+		width: 90%;
+		background-color: inherit;
+		top:10em;left:0px;right:0px;bottom:0px;
+	}
+	.case-layout{
+		display: flex;
+		flex-wrap: wrap;
+		flex-direction: column;
+	}
+	.case-layout>a{
+		margin: 1em;
+		font-weight: bold;
+		flex-grow: 1;
+		padding: 1.5em 1em;
+		color: white;
+		border-radius: 10px;
+		text-decoration: none;
+		background-color: #616873;
+		box-shadow: 0 5px -4px -4px black;
+	}
+	.case-layout>a:hover{
+		background-color: #A7ACB6;
+	}
+    .hidden{
+        display: none;
+        transition: .5s;
+    }
+</style>
+</head>
+<body>
+	<div class="context">
+	    <div class="toptab" onclick="mainpage()">
+			<img src="../favicon.ico" class="icon"/>
+			<span class="mytitle">Hollway</span>
+		</div>
+		<div class="topsector">
+			<div class="navbar" id="navbar">
+                <!-- 要添加新选块，需对应其select第一个参数targetname和这里的id，以及sector的alt -->
+			    <div onclick="select('program','#f5d6eb')" id="program">CSS</div>
+			    <div onclick="select('blogs','#F4CDCD')" id="blogs">Friends</div>
+				<div class="selected" onclick="select('mmd','yellow')" id="mmd">MMD舞蹈</div>
+				<div onclick="select('parkour','#67F2F5')" id="parkour">move</div>
+				<div onclick="select('shopping','#FAB0FB')" id="shopping">cheap</div>			
+			</div>
+		</div>
+		<div class="sector hidden" alt='parkour'>
+		<div class="case-layout">
+			<a href="#">cat creep</a>
+			<a href="#">precision</a>
+			<a href="#">lazy vault</a>
+			<a href="#">safe vault</a>
+			<a href="#">monkey vault</a>
+			<a href="#">kong vault</a>
+			<a href="#">tic tak</a>
+			<a href="#">cat leap</a>
+			<a href="#">reverse vault</a>
+			<a href="#">palm spin</a>
+			<a href="#">cart wheel</a>
+			<a href="#">side flip</a>
+			<a href="#">muscle up</a>
+			<a href="#">flag</a>
+		</div>
+		</div>
+		<div class="sector hidden" alt="program">
+		<div class="case-layout">
+			<a target="_blank" href="./fun/dateornot.html">有香味的CSS页面设计</a>
+			<a target="_blank" href="../jsp/welcome.jsp">jsp页面实现</a>
+			<a target="_blank" href="./fun/3D/index.html">3D Creeper</a>
+			<a target="_blank" href="./fun/smoke.html">Smoke</a>
+			<a target="_blank" href="./fun/lights.html">Following lights</a>
+			<a target="_blank" href="./fun/blocks.html">Boring Pager</a>
+			<a target="_blank" href="./fun/learn-css/align.html">align</a>
+			<a target="_blank" href="./fun/learn-css/animation-1.html">animation</a>
+			<a target="_blank" href="./fun/learn-css/blur.html">Blur</a>
+			<a target="_blank" href="./fun/learn-css/element-layout.html">element-layout</a>
+			<a target="_blank" href="./fun/learn-css/layout2">layout2</a>
+			<a target="_blank" href="./fun/learn-css/layout3">layout3</a>
+			<a target="_blank" href="./fun/learn-css/nav-example.html">navagator example</a>
+			<a target="_blank" href="./fun/learn-css/pie.html">Draw a pie with css</a>
+			<a target="_blank" href="./fun/learn-css/sticky-footer.html">sticky footer</a>
+			<a target="_blank" href="./fun/learn-css/user-interaction.html">user interaction</a>
+			<a target="_blank" href="./fun/learn-css/visual-effects.html">visual effects</a>
+			<a target="_blank" href="../3d-pages/test.html">three.js</a>
+			<!--a target="_blank" href="./fun/learn-css/"></a-->
+		</div>
+		</div>
+		<div class="sector hidden" alt="shopping">
+		<div class="case-layout">
+			<a href="https://pifa.pinduoduo.com/">拼多多批发</a>
+			<a href="https://www.1688.com/?spm=a312h.2018_new_sem.dh_004.1.3afc418fM3bfST">1688</a>
+			<a href="https://www.yiwugo.com/?cn">义乌购</a>
+		</div>
+		</div>
+		<div class="sector" alt='mmd'>
+		<div class="case-layout">
+			<a href="../3d-pages/mmd-v3/index.html?model=Xiangling">香菱</a>
+			<a href="../3d-pages/mmd-v3/index.html?model=Babara">芭芭拉</a>
+			<a href="../3d-pages/mmd-v3/index.html?model=Fischl">菲谢尔</a>
+			<a href="../3d-pages/mmd-v3/index.html?model=Shatang">砂糖</a> 
+			<a href="../3d-pages/mmd-v3/index.html?model=Keqing-s">刻晴</a>
+			<a href="../3d-pages/mmd-v3/index.html?model=General">雷电将军</a>
+			<a href="../3d-pages/mmd-v3/index.html?model=Shenhe">申鹤</a>
+			<a href="../3d-pages/mmd-v3/index.html?model=Ganyu">甘雨</a>
+			<a href="../3d-pages/mmd-v3/index.html?model=Zaoyou">早柚</a>
+			<a href="../3d-pages/mmd-v3/index.html?model=Diona">迪奥娜</a>
+			<a href="../3d-pages/mmd-v3/index.html?model=Hutao">胡桃</a>
+			<a href="../3d-pages/mmd-v3/index.html?model=Xiaogong">宵宫</a>
+			<a href="../3d-pages/mmd-v3/index.html?model=Rosaria">罗莎莉亚</a>
+			<a href="../3d-pages/mmd-v3/index.html?model=Jean">琴</a>
+		</div>
+		</div>
+		<div class="sector hidden" alt='blogs'>
+		<div class="case-layout">
+			<!--a href="../res/unit5.html">英汉翻译第五单元词汇</a!-->
+			<a target="_blank" href="http://106.52.218.164/">HaQi的小破站</a>
+			<a target="_blank" href="https://wzdjscdj.com/">CD机的小站-一个有温度的小站</a>
+		</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+    	function mainpage(){
+            window.location.href="./index.html";
+        }
+		var selected = 0;
+		// 选择一个块，参数一为id值，参数二为要闪的颜色
+		function select(targetname, color){
+			var targets = window.document.querySelectorAll('.navbar > div');
+			for(let i=0; i<targets.length; i++){
+				var id = targets[i].getAttribute('id');
+				if(id!=targetname){
+					targets[i].setAttribute('class', '');
+					targets[i].setAttribute('style', 'color:white;border-bottom-color:transparent;');
+				}
+				else{
+					targets[i].setAttribute('class', 'selected');
+					targets[i].setAttribute('style', 'color:'+color+';border-bottom-color:'+color);
+				}
+			}
+            // 遍历所有sector，用参数targetname对比控件alt值，相同就去除hidden类，不相同就加上hidden类
+			var sectors = window.document.querySelectorAll('.sector');
+			for(let i=0; i<sectors.length; i++){
+				var alt = sectors[i].getAttribute('alt');
+				if(alt!=targetname){
+					sectors[i].classList.add('hidden');
+				}
+				else{
+					sectors[i].classList.remove('hidden');
+				}
+			}
+		}
+	</script>
+</body>
+</html>

@@ -1,0 +1,88 @@
+@charset "UTF-8";
+    body{
+		background-image: url(../img/background.png);
+		background-size:cover;
+		background-repeat:no-repeat;
+		background-attachment:fixed;
+		font-family: Monospace;
+	}
+	.context{
+		background-color: #232b33;
+		align-items: center;
+		display: flex;
+		flex-direction: column;
+		border-radius: 10px;
+	}
+	.toptab{
+		margin: 1em;
+		display: flex;
+		align-items: center;
+	}
+	.toptab > .icon{
+		display: inline-block;
+	}
+	.toptab > .mytitle{
+		margin-left: .4em;
+		color: #a58aac;
+		font-size: 200%;
+		font-family: Monospace;
+		cursor: default;
+	}
+	.panel{
+		margin: .5em;
+		padding: 1em;
+		width: 70%;
+		height: 3em;
+		display: flex;
+		align-items: center;
+		background-color: #eeefa8;
+		border-radius: 10px;
+		cursor: pointer;
+		text-decoration: none;
+	}
+	.panel:hover{
+		background-color: #f1cdec;
+	}
+	.barepanel{
+		margin: .5em;
+		padding: 1em;
+		width: 70%;
+		height: 3em;
+		display: flex;
+		align-items: center;
+		border-radius: 10px;
+		background-color: transparent;
+		cursor: pointer;
+		text-decoration: none;
+	}
+	.barepanel:hover{
+		background-color: rgba(0,0,0,.3);
+	}
+	.hor-text-container{
+		margin-left: 1em;
+		display: flex;
+		flex-direction: column;
+	}
+	.mytext{
+		margin: 2px; 
+		font-size: 150%;
+		color: black;
+	}
+	.mytext + .mytext{
+		font-size: 100%;
+	}
+	.barepanel > .mytext{
+		margin-left: 1em;
+		font-size: 150%;
+		color: white;
+	}
+	.filter{
+		filter: invert(100%);
+	}
+	.foot{
+		border-radius: 0 0 10px 10px;
+		height: 5em;
+		width: 100%;
+		background: #242230;
+		color: #B3ADC4;
+	}

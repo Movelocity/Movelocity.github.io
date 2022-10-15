@@ -1,0 +1,4 @@
+ 链接:http://42.193.248.171:8888/down/MYqU8FeG9Q9G 提取码:cccc&nbsp;2021-12-01 07:14:05&nbsp;[120.235.177.79]&#10;
+ yum install glibc-devel.i686 libstdc++-devel.i686&nbsp;2021-12-01 07:16:47&nbsp;[120.235.177.79]&#10;
+ https://blog.csdn.net/xsckernel/article/details/38045783 在64位linux下编译32位程序&nbsp;2021-12-01 07:19:14&nbsp;[120.235.177.79]&#10;
+ 链接:http://42.193.248.171:8888/down/VnC9Z4IE7NiP 提取码:debug Ubuntu下的调试软件&nbsp;2021-12-01 07:39:39&nbsp;[120.235.177.79]&#10;

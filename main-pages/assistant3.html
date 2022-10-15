@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<link rel="shortcut icon" href="./favicon.ico" />
+<title>Artificial Ignorance</title> 
+<link rel="stylesheet" href="../styles/index.css" 
+		media="screen" type="text/css"/>
+<link rel="stylesheet" href="../styles/chat.css" 
+		media="screen" type="text/css"/>
+<style></style>
+</head>
+<body>
+	<div class="ion-page">
+		<div class="ion-header" onclick="mainpage()">
+		    <div class='header2'>
+		        <img src="../favicon.ico" class="icon"/>
+			    <span class="mytitle">Hollway</span>
+		    </div>
+		</div>
+	    <br/>
+	    <div id="inner-scroll" class='inner-scroll'>
+	        <div id="chat-space" class="chat-space">
+	            <div style="height: 70px"></div>
+    		    <div name="temp_rep" class="reply">
+    		        <img src="../img/ai1.png">
+    		        <div>我是AI，请问有什么要问我的吗？</div>
+    		    </div>
+    		    <div name="temp_que" class="quest" style="display:none;">
+    		        <div>Hello! </div>
+    		        <img src="../img/user1.png">
+    		    </div>
+		    </div>
+	    </div>
+		
+		<div class="toolbar-container">
+		    <div class='textarea-holder'>
+		        <textarea id="c-input" value="" class="textarea"></textarea>
+		    </div>
+		    
+	    </div>
+	</div>
+<script type="text/javascript">
+	function mainpage(){
+        window.location.href="./index.html";
+    }
+    
+    function add_chat_item(content, role){
+        var flow = document.getElementById("chat-space");
+        let newNode = document.createElement("div");
+        if(role=='user'){
+            newNode.setAttribute('class', 'quest');
+            newNode.innerHTML='<div>'+content+'</div><img src="../img/user1.png">'
+        }else{
+            newNode.setAttribute('class', 'reply');
+            newNode.innerHTML='<img src="../img/ai1.png"><div>'+content+'</div>';
+        }
+        flow.appendChild(newNode);   // insert new chatting log
+        scrollBottom();
+    }
+    
+    var token = '';
+    function get_token(){
+        if(window.XMLHttpRequest) var panda = new XMLHttpRequest();
+    	else var panda = new ActiveXObject('Microsoft.XMLHTTP');
+        panda.onreadystatechange = function(){
+    	    console.log(panda.readyState);
+			//在ajax方式中，200和4表示正常取值
+			if(panda.status == 200 &&　panda.readyState == 4){
+    			token = panda.responseText;
+    			console.log(token);
+			}
+    	}
+    	panda.open('post','http://42.193.248.171/special/get_token.php',true);//post方式传值
+    	panda.setRequestHeader('content-type','application/x-www-form-urlencoded');
+    	panda.send();
+    }
+    
+    async function ask(content){
+        if(window.XMLHttpRequest){
+    		var panda = new XMLHttpRequest();
+    	}
+    	else{
+    		var panda = new ActiveXObject('Microsoft.XMLHTTP');
+    	}
+    	
+    	panda.onreadystatechange = function(){
+    	    //console.log(panda.readyState);
+			//在ajax方式中，200和4表示正常取值
+			if(panda.status == 200 &&　panda.readyState == 4){
+				let resp = panda.responseText;//结果赋值
+				add_chat_item(resp, 'ai');
+			}
+    	}
+        //ajax方式（更新数据，而不用刷新整个网页），connect.php用于连接和读取数据库，作为对ajax的辅助
+    	panda.open('post','http://42.193.248.171/special/ask.php',true);//post方式传值
+    	panda.setRequestHeader('content-type','application/x-www-form-urlencoded');
+    	panda.send('token='+token+'&query='+content);
+    }
+    
+    // 一轮对话
+    function roll(){
+        var input = document.getElementById("c-input");
+        
+        let content = input.value;
+        if(content=="") return;  // in case there is no input
+        add_chat_item(content, 'user');
+        
+        ask(content);           // 发送给AI
+
+    	input.value = "";       // 清空输入框
+    	input.focus();          // 输入框获得焦点
+    }
+    
+    let cnt = 0;
+    function scrollBottom(){
+        if(cnt++>6){
+            var item = document.getElementById("inner-scroll");
+            item.scrollTo(0,99999999);
+        }
+    }
+    
+    onload=function(){
+        get_token();
+        var input = document.getElementById("c-input");
+        input.onkeydown=function(event){
+            event = event||window.event;
+            if((event.keyCode == 13)){  //回车触发对话提交
+                event.preventDefault();
+                roll();
+            }
+        }
+    }
+    
+    // var greeting = [
+    //     "你好，新的一天，从一场美妙的邂逅开始", 
+    //     "我是AI，请问有什么要问我的吗", 
+    //     "这真是个神奇的地方，不是吗？它让我们的灵魂跨越时空于此相遇 多么浪漫呀",
+    //     "哎，终于轮到我啦，这段时间我可是一直都在构思与你见面的开场白呢",
+    //     ];
+</script>
+</body>
+</html>

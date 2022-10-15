@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>colorful blocks</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+        body{
+            height: 100vh;
+            background-color: #3c374a;
+            display:flex;
+            justify-content: center;
+            align-items:center;
+            user-select: none;
+        }
+
+        .container{
+            display:flex;
+        }
+
+        .container .sliding-window{
+            position: relative;
+            width: 0px;
+            overflow:hidden;
+        }
+
+        .container .pages{
+            position: relative;
+            display: flex;
+            transition: all 0.5s;
+        }
+
+        .container .slider{
+            position:absolute;
+            background-color: #18ba9a;
+            border-radius: 5px;
+            transition: all 1s;
+            cursor: pointer;
+        }
+
+        .container .block{
+            --size: 50px;
+            flex-shrink: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #283144;
+            border-radius: 5px;
+            box-shadow: 0px 2px 3px #000000aa;
+            cursor: pointer;
+        }
+
+        .container .block:hover{
+            background-color: #e88b00;
+            transition: all .5s;
+        }
+
+        .container .block span{
+            z-index: 2;
+            font-size: 1.5em;
+            color: #dab710;
+        }
+
+        .container .page:hover,
+        .container .page.active{
+            text-shadow: 1px 1px 10px #eddd9e, -1px -1px 10px #eddd9e;
+            transition: all .5s;
+        }
+
+
+    </style>
+</head> 
+
+<body>
+    <div id="app">
+        <div class="container">
+            <!--左翻页-->
+            <div class="previous-page block" @click="prevPage" :style="pageStyle"><span>&lt;</span></div>
+            <div class="sliding-window" :style="slidingWindowStyle">
+                <div class="pages" :style="pagesStyle">
+                    <div class="slider" :style="sliderStyle" :style="pageStyle"></div>
+                    <div class="page block" v-for="(item, index) in pages" :ref="(el) => {item.el = el}" 
+                        :class="active.value==item.value?'active':''" :style="pageStyle" key="index"
+                        @click="pageClick($event,item,index)">
+                        <span>{{item.value}}</span>
+                    </div>
+
+                </div>
+            </div>
+            <!--右翻页-->
+            <div class="next-page block" @click="nextPage" :style="pageStyle"><span>&gt;</span></div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+        Vue.createApp({
+            setup(){
+                /** config*/
+                let minPage = 1;
+                let maxPage = 20;
+                const pageSize = 50;        // the size of the square btn
+                const marginSize = 5;       // margin of buttons
+
+                let maxShowNumber = 4;      // maximum number of buttons
+                let showNum = maxShowNumber;// numver of buttons displayed
+                if(maxPage - minPage + 1 < maxShowNumber){
+                    showNum = maxPage - minPage + 1;
+                }
+
+                /** style*/
+                // the selected slider
+                const sliderStyle = Vue.reactive({ left: "-100px"});
+                
+                // display the buttons
+                let slidingWindowStyle = Vue.reactive({});
+                slidingWindowStyle.width = `${(marginSize * 2 + pageSize) * showNum}px`
+                let pagesStyle = Vue.reactive({})
+
+                // sizes of buttons
+                let pageStyle = {
+                    height: `${pageSize}px`,
+                    width: `${pageSize}px`,
+                    margin: `${marginSize}px`,
+                };
+
+                /** _data*/
+                // selected
+                let active = Vue.reactive({ value: null, target: null});
+
+                // init pages
+                let pages = [];
+
+                // window position
+                let slidingWindowLeft = 0;
+
+                // init pages
+                for(let i=minPage; i<=maxPage; i++){
+                    pages.push({ value: i, style: pageStyle });
+                }
+
+                // reactive
+                pages = Vue.reactive(pages);
+
+                /** update data in display*/
+                const update = function(){
+                    pagesStyle.left = `${(marginSize * 2 + pageSize) * -slidingWindowLeft}px`
+                    //console.log("pagesStyle.left: "+pagesStyle.left);
+                }
+                update();
+
+                /** sliding animation*/
+                const sliderFocus = function(e){
+                    sliderStyle.top = e.offsetTop + `px`;
+                    sliderStyle.left = e.offsetLeft + `px`;
+                    sliderStyle.height = e.offsetHeight + `px`;
+                    sliderStyle.width = e.offsetWidth + `px`;
+                }
+
+                // event
+                /** previous page*/
+                const prevPage = function(){
+                    if(active.value > minPage){
+                        active.index -= 1;
+                        //console.log(active.index);
+                        active.target = pages[active.index];
+                        active.value = active.target.value;
+                        sliderFocus(active.target.el);
+
+                        // ckeck if in displaying area
+                        let posin = active.value - minPage;
+                        if(posin < slidingWindowLeft){
+                            slidingWindowLeft = posin;
+                            update();
+                        }
+                    }
+                }
+
+                /** next page*/
+                const nextPage = function(){
+                    if(active.value < maxPage){
+                        active.index += 1;
+                        //console.log(active.index);
+                        active.target = pages[active.index];
+                        active.value = active.target.value;
+                        sliderFocus(active.target.el);
+
+                        // ckeck if in displaying area
+                        let slidingWindowRight = slidingWindowLeft + showNum - 1;
+                        let posin = active.value - minPage;
+                        //console.log("posin: "+posin+", slidingWindowRight: "+slidingWindowRight);
+                        if(posin > slidingWindowRight){
+                            slidingWindowRight = posin;
+                            slidingWindowLeft = slidingWindowRight - showNum + 1;
+                            update();
+                        }
+                    }
+                }
+
+                /* button click events*/
+                const pageClick = function(e, item, index){
+                    active.index = index;
+                    active.target = item;
+                    active.value = active.target.value;
+                    sliderFocus(e.currentTarget);
+                    //console.log(index);
+                }
+
+                Vue.onMounted(()=>{
+                    // init active
+                    if(pages.length > 0){
+                        active.index = 0;
+                        active.value = pages[0].value;
+                        active.target = pages[0];
+                        setTimeout(()=>{
+                            sliderFocus(active.target.el);
+                        }, 1);
+                        //console.log("onMounted");
+                    }
+                });
+
+                return {
+                    // style
+                    pageStyle, slidingWindowStyle, pagesStyle, sliderStyle,
+
+                    //data
+                    pages, active,
+
+                    //event
+                    prevPage, nextPage, pageClick,
+
+                    //el
+                }
+            }
+        }).mount("#app");
+    </script>
+
+</body>
+
+
+</html>

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <style>
+        body {
+            background-color: #ffffff;
+        }
+
+        .header {
+            font-size: medium;
+            margin: 2.5em 0 1.5em .5em;
+        }
+
+
+        .item_row {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            width: 100%;
+        }
+
+        .click_item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 22%;
+            padding: .5em 0;
+            width: auto;
+            height: auto;
+            text-decoration: none;
+        }
+
+        .click_item>img {
+            max-width: 75%;
+            max-height: 75%;
+            width: auto;
+            height: auto;
+        }
+
+        .click_item>span {
+            font-size: small;
+            color: #a1a1a1;
+        }
+
+
+
+        .absolute_bottom {
+            position: fixed;
+            bottom: 0em;
+            background-color: #ffffff;
+            border-top: .5px solid gray;
+        }
+
+
+        .absolute_bottom>.click_item>img {
+            max-width: 40%;
+        }
+        
+        .vertical-flex{
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: center;
+        }
+        
+        .head_img{
+            max-height: 70px;
+            border-radius: 50%;
+            margin-right: 1em;
+        }
+        .row{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
+        .around{
+            justify-content: space-between;
+        }
+        .v-padding{
+            padding: .5em 0;
+        }
+        .container{
+            padding-right: .7em;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        我的
+    </div>
+    
+    <div class="row around" style="padding: .5em 0 1em .5em;">
+        <div style="display:flex; flex-direction:row;">
+            <img id="head_img" class="head_img"/>
+            <div class="vertical-flex">
+                <div id="title_name" style="padding:.5em 0;">詹仁博/信息学院</div>
+                <img src="./drawable/at_school.png" style="max-height:28px"/>
+            </div>
+        </div>
+        
+        <div class="row">
+            编辑
+            <img src="./drawable/right_arrow.png" style="max-height:20px"/>
+        </div>
+    </div> 
+    
+    <div>
+        <div class="row around v-padding">
+            <div class="row" onclick="qrcode_page()"><img src="./drawable/green_qrcode.png" style="max-height: 20px; padding:.5em"/>出入校二维码</div>
+            <img src="./drawable/right_arrow.png" style="max-height:20px"/>
+        </div>
+        <div class="row around v-padding">
+            <div class="row"><img src="./drawable/green_env.png" style="max-height: 20px; padding:.5em"/>意见反馈</div>
+            <img src="./drawable/right_arrow.png" style="max-height:20px"/>
+        </div>
+        <div class="row around v-padding">
+            <div class="row"><img src="./drawable/green_scan.png" style="max-height: 20px; padding:.5em"/>扫一扫</div>
+            <img src="./drawable/right_arrow.png" style="max-height:20px"/>
+        </div>
+    </div>
+    
+    <div class="absolute_bottom item_row">
+        <a class="click_item" onclick="main_page()"><img src="./drawable/main_gray.png"/><span>首页</span></a>
+        <a class="click_item" onclick="class_page()"><img src="./drawable/class_gray.png"/><span>我的班级</span></a>
+        <a class="click_item" ><img src="./drawable/user_green.png"/><span style="color:#7dc37c">我的</span></a>
+    </div>
+    
+</div>
+<script src="my_util.js"></script>
+<script>
+    var randName = getFullName();
+    var img_name = getImgName();
+    var size = getPageSize();
+    
+    document.getElementById("head_img").src = "./boy_head/"+img_name;
+    document.getElementById("title_name").innerHTML = randName+"/信息学院";
+    function main_page(){
+        // 跳转到index.html 页面并清除当前页面的history记录
+        window.history.replaceState(null, "", `./main.html?size=${size}&name=${randName}&img_name=${img_name}`);
+        window.history.go(0);
+    }
+    
+    function class_page(){ 
+        console.log("page is under construction.");
+    }
+    function qrcode_page(){
+        window.location.href=`./qrcode.html?size=${size}&name=${randName}`;
+    }
+</script>
+</body>
