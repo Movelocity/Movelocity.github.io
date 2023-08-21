@@ -1,0 +1,28 @@
+{
+    "version": "https://jsonfeed.org/version/1",
+    "title": "Hollway",
+    "subtitle": "hexo blog",
+    "icon": "http://movelocity.github.io/images/favicon.ico",
+    "description": "static site for recording thoughts, experiences and tutorials",
+    "home_page_url": "http://movelocity.github.io",
+    "items": [
+        {
+            "id": "http://movelocity.github.io/tricks/hexo/",
+            "url": "http://movelocity.github.io/tricks/hexo/",
+            "title": "Markdown 中插入图片",
+            "date_published": "2023-08-20T07:09:32.000Z",
+            "content_html": "<h2 id=\"直接使用-markdown-语法\"><a class=\"anchor\" href=\"#直接使用-markdown-语法\">#</a> 直接使用 Markdown 语法</h2>\n<pre><code>![图片名称](demo2.jpg)\n</code></pre>\n<p><img data-src=\"demo2.jpg\" alt=\"图片名称\"></p>\n<h2 id=\"使用-html-语法允许自定义图片宽高\"><a class=\"anchor\" href=\"#使用-html-语法允许自定义图片宽高\">#</a> 使用 HTML 语法，允许自定义图片宽高</h2>\n<pre><code>&lt;img src=&quot;demo.jpg&quot; width=&quot;300&quot; height=&quot;200&quot; alt=&quot;图片名称&quot;/&gt;\n</code></pre>\n<img data-src=\"demo.png\" width=\"200\" height=\"300\" alt=\"图片名称\"/>\n<br/>\n需要自定义位置的话，只要在外面包围 div 标签即可：\n```\n<div align=\"center\">\n  <img data-src=\"demo2.jpg\" width = \"300\" height = \"200\" alt=\"图片名称\"/>\n</div>\n```\n<h2 id=\"warning\"><a class=\"anchor\" href=\"#warning\">#</a> Warning</h2>\n<p>不要试图在 html 标签内部使用 markdown</p>\n<pre><code>&lt;div ...&gt;\n    ![图片名称](demo.jpg)\n&lt;/div&gt;\n</code></pre>\n<h2 id=\"不错的教程\"><a class=\"anchor\" href=\"#不错的教程\">#</a> 不错的教程</h2>\n<p><span class=\"exturl\" data-url=\"aHR0cHM6Ly9ibG9nLmZlZGZhbnMuY29tL2NhdGVnb3JpZXMvaGV4byVFNCVCOCU5MyVFNiVBMCU4Ri8=\">https://blog.fedfans.com/categories/hexo 专栏 /</span><br>\n<span class=\"exturl\" data-url=\"aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2hvd2FyZXlvdTIxMDQvYXJ0aWNsZS9kZXRhaWxzLzEwNjMxMjcwMw==\">https://blog.csdn.net/howareyou2104/article/details/106312703</span><br>\n<span class=\"exturl\" data-url=\"aHR0cHM6Ly9ibG9nLmZlZGZhbnMuY29tL2NhdGVnb3JpZXMvJUU4JUJGJTkwJUU3JUJCJUI0JUU1JUIwJThGJUU4JUFFJUIwLw==\">https://blog.fedfans.com/categories/ 运维小记 /</span></p>\n",
+            "tags": [
+                "网络"
+            ]
+        },
+        {
+            "id": "http://movelocity.github.io/hello-world/",
+            "url": "http://movelocity.github.io/hello-world/",
+            "title": "Hello World",
+            "date_published": "2023-08-20T03:23:31.510Z",
+            "content_html": "<p>Welcome to <span class=\"exturl\" data-url=\"aHR0cHM6Ly9oZXhvLmlvLw==\">Hexo</span>! This is your very first post. Check <span class=\"exturl\" data-url=\"aHR0cHM6Ly9oZXhvLmlvL2RvY3Mv\">documentation</span> for more info. If you get any problems when using Hexo, you can find the answer in <span class=\"exturl\" data-url=\"aHR0cHM6Ly9oZXhvLmlvL2RvY3MvdHJvdWJsZXNob290aW5nLmh0bWw=\">troubleshooting</span> or you can ask me on <span class=\"exturl\" data-url=\"aHR0cHM6Ly9naXRodWIuY29tL2hleG9qcy9oZXhvL2lzc3Vlcw==\">GitHub</span>.</p>\n<h2 id=\"quick-start\"><a class=\"anchor\" href=\"#quick-start\">#</a> Quick Start</h2>\n<h3 id=\"create-a-new-post\"><a class=\"anchor\" href=\"#create-a-new-post\">#</a> Create a new post</h3>\n<figure class=\"highlight bash\"><figcaption data-lang=\"bash\"><span>h</span></figcaption><table><tr><td data-num=\"1\"></td><td><pre>$ hexo new <span class=\"token string\">\"My New Post\"</span></pre></td></tr></table></figure><p>More info: <span class=\"exturl\" data-url=\"aHR0cHM6Ly9oZXhvLmlvL2RvY3Mvd3JpdGluZy5odG1s\">Writing</span></p>\n<h3 id=\"run-server\"><a class=\"anchor\" href=\"#run-server\">#</a> Run server</h3>\n<figure class=\"highlight bash\"><figcaption data-lang=\"bash\"><span>h</span></figcaption><table><tr><td data-num=\"1\"></td><td><pre>$ hexo server</pre></td></tr></table></figure><p>More info: <span class=\"exturl\" data-url=\"aHR0cHM6Ly9oZXhvLmlvL2RvY3Mvc2VydmVyLmh0bWw=\">Server</span></p>\n<h3 id=\"generate-static-files\"><a class=\"anchor\" href=\"#generate-static-files\">#</a> Generate static files</h3>\n<figure class=\"highlight bash\"><figcaption data-lang=\"bash\"><span>h</span></figcaption><table><tr><td data-num=\"1\"></td><td><pre>$ hexo generate</pre></td></tr></table></figure><p>More info: <span class=\"exturl\" data-url=\"aHR0cHM6Ly9oZXhvLmlvL2RvY3MvZ2VuZXJhdGluZy5odG1s\">Generating</span></p>\n<h3 id=\"deploy-to-remote-sites\"><a class=\"anchor\" href=\"#deploy-to-remote-sites\">#</a> Deploy to remote sites</h3>\n<figure class=\"highlight bash\"><figcaption data-lang=\"bash\"><span>h</span></figcaption><table><tr><td data-num=\"1\"></td><td><pre>$ hexo deploy</pre></td></tr></table></figure><p>More info: <span class=\"exturl\" data-url=\"aHR0cHM6Ly9oZXhvLmlvL2RvY3Mvb25lLWNvbW1hbmQtZGVwbG95bWVudC5odG1s\">Deployment</span></p>\n",
+            "tags": []
+        }
+    ]
+}
